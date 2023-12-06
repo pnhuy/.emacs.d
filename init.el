@@ -36,3 +36,9 @@
 
 ;; load treemacs
 (load (expand-file-name "treemacs.el" user-emacs-directory))
+
+;; load org mode config
+(load (expand-file-name "org.el" user-emacs-directory))
+
+;; load dashboard config
+(load (expand-file-name "dashboard.el" user-emacs-directory))

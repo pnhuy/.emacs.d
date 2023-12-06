@@ -5,6 +5,7 @@
 (setq package-selected-packages
   '(material-theme
     magit
+    evil
     treemacs treemacs-projectile treemacs-icons-dired treemacs-magit
     lsp-mode lsp-treemacs helm-lsp
     projectile hydra flycheck company avy which-key helm-xref dap-mode
