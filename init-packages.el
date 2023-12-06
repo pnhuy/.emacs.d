@@ -9,6 +9,7 @@
     lsp-mode lsp-treemacs helm-lsp
     projectile hydra flycheck company avy which-key helm-xref dap-mode
     exec-path-from-shell
+    evil
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)

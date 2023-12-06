@@ -9,11 +9,22 @@
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
+;; python mode
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp-deferred))))  ; or lsp
+
+;; json mode
+(use-package json-mode
+  :ensure t
+  :mode "\\.json\\'"
+  :config
+  (setq js-indent-level 2)
+  ;; chang hot key for json-pretty-print-buffer
+  (define-key json-mode-map (kbd "C-c l = =") 'json-pretty-print-buffer)
+  )
 
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode)
