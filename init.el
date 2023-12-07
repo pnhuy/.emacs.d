@@ -42,3 +42,6 @@
 
 ;; load dashboard config
 (load (expand-file-name "dashboard.el" user-emacs-directory))
+
+;; load fzf config
+(load (expand-file-name "fzf.el" user-emacs-directory))
