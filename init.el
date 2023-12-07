@@ -1,4 +1,8 @@
+;; config and load packages
+(setq custom-file (expand-file-name "package-selected-packages.el" user-emacs-directory))
+(load custom-file)
 (load (expand-file-name "init-packages.el" user-emacs-directory))
+
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
@@ -45,3 +49,8 @@
 
 ;; load fzf config
 (load (expand-file-name "fzf.el" user-emacs-directory))
+
+(global-set-key (kbd "M-i") 'imenu)
+
+(add-hook 'prog-mode-hook 'git-gutter-mode)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
