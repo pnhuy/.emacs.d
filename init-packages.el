@@ -11,6 +11,7 @@
     projectile hydra flycheck company avy which-key helm-xref dap-mode
     exec-path-from-shell
     evil
+    typescript-mode tree-sitter tree-sitter-langs
     fzf
     git-gutter
     ))
