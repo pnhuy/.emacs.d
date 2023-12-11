@@ -8,3 +8,6 @@
 
 (setq org-adapt-indentation t)
 (setq org-list-allow-alphabetical t)
+
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))

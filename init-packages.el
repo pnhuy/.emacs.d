@@ -14,6 +14,7 @@
     typescript-mode tree-sitter tree-sitter-langs
     fzf
     git-gutter
+    org-bullets
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
