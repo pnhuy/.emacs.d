@@ -8,6 +8,7 @@
 
 (setq make-backup-files nil) ; stop creating ~ files
 (setq create-lockfiles nil) ; stop creating # files
+(setq backup-directory-alist '(("." . (concat user-emacs-directory "backups"))))
 
 ;; disable menu bar
 (menu-bar-mode -1)
