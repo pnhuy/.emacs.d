@@ -15,6 +15,7 @@
     fzf
     git-gutter
     org-bullets
+    undo-tree
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)

@@ -55,3 +55,8 @@
 
 (add-hook 'prog-mode-hook 'git-gutter-mode)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+;; undo tree mode
+(global-undo-tree-mode)
+(setq undo-tree-auto-save-history t)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
