@@ -11,3 +11,13 @@
 
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(defun org-table-collapse-cell ()
+  (interactive)
+  (save-excursion ;; Save point
+    (org-table-blank-field) ;; Blank the cell
+    (while (progn ;; Swap blank cell with a cell under it until the blank is at the bottom.
+         (org-table--move-cell 'down)
+         (org-table-align)
+         (org-table-check-inside-data-field))))
+  (org-table-next-field))
