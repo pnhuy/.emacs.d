@@ -65,8 +65,6 @@
 
 (global-set-key (kbd "M-i") 'imenu)
 
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-
 ;; undo tree mode
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)
@@ -75,3 +73,15 @@
 ;; git-gutter
 (add-hook 'prog-mode-hook 'git-gutter-mode)
 (custom-set-variables '(git-gutter:update-interval 0.5))
+
+;; custom find file function
+(defun custom-find-file ()
+  "Wrapper function for finding files."
+  (interactive)
+  (if (and (fboundp 'projectile-project-p)
+           (projectile-project-p))
+      (call-interactively 'helm-projectile-find-file-dwim)
+    (call-interactively 'helm-find-files)))
+
+;; Bind the keymap
+(global-set-key (kbd "C-x C-f") 'custom-find-file)
