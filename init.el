@@ -90,3 +90,9 @@
 
 ;; Projectile
 (setq projectile-switch-project-action #'helm-projectile-find-file-dwim)
+
+;; Latex Preview folder
+(setq org-preview-latex-image-directory 
+      (concat temporary-file-directory "ltximg/"))
+;; Config latex preview process list
+(setq org-preview-latex-default-process 'dvisvgm)
