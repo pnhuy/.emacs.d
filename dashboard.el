@@ -3,6 +3,8 @@
   :ensure t
   :config
   (dashboard-setup-startup-hook)
+  ;; dashboard project backend to projectile
+  (setq dashboard-projects-backend 'projectile)
   (setq dashboard-center-content t)
   (setq dashboard-items '((recents  . 5)
                         ;; (bookmarks . 5)

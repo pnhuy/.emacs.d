@@ -85,3 +85,6 @@
 
 ;; Bind the keymap
 (global-set-key (kbd "C-x C-f") 'custom-find-file)
+
+;; Projectile
+(setq projectile-switch-project-action #'helm-projectile-find-file-dwim)
