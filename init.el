@@ -46,6 +46,8 @@
 ;; disable startup screen
 (setq inhibit-startup-message t)
 
+;; auto resolve symlinks
+(setq find-file-visit-truename t)
 
 ;; load lsp-mode
 (load (expand-file-name "lsp.el" user-emacs-directory))
