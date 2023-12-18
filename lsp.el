@@ -59,3 +59,8 @@
 (setq lsp-ui-doc-position 'at-point)
 (setq lsp-ui-doc-show-with-mouse t)
 
+;; change hot key from enter to tab for company-complete-selection
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "<return>") nil)
+  (define-key company-active-map (kbd "RET") nil)
+  (define-key company-active-map (kbd "TAB") 'company-complete-selection))
