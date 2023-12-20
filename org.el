@@ -27,3 +27,12 @@
 (setq org-latex-create-formula-image-program 'dvisvgm)
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (python . t)))
+
+;; set path for python
+(setq org-babel-python-command "python3")
+
