@@ -15,6 +15,7 @@
     fzf
     git-gutter
     org-bullets
+    org-fragtog
     undo-tree
     ))
 
