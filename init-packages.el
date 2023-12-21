@@ -5,10 +5,17 @@
 (setq package-selected-packages
   '(material-theme
     helm
+    helm-lsp
+    helm-projectile
     magit
-    treemacs treemacs-projectile treemacs-icons-dired treemacs-magit
-    lsp-mode lsp-treemacs helm-lsp
-    projectile hydra flycheck company avy which-key helm-xref dap-mode
+    treemacs
+    treemacs-projectile
+    treemacs-icons-dired
+    treemacs-magit
+    lsp-mode
+    lsp-treemacs 
+    projectile 
+    hydra flycheck company avy which-key helm-xref dap-mode
     exec-path-from-shell
     evil
     typescript-mode tree-sitter tree-sitter-langs

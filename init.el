@@ -77,19 +77,20 @@
 (custom-set-variables '(git-gutter:update-interval 0.5))
 
 ;; custom find file function
+(require 'helm-projectile)
 (defun custom-find-file ()
   "Wrapper function for finding files."
   (interactive)
   (if (and (fboundp 'projectile-project-p)
            (projectile-project-p))
-      (call-interactively 'helm-projectile-find-file-dwim)
+      (call-interactively 'helm-projectile-find-file)
     (call-interactively 'helm-find-files)))
 
 ;; Bind the keymap
 (global-set-key (kbd "C-x C-f") 'custom-find-file)
 
 ;; Projectile
-(setq projectile-switch-project-action #'helm-projectile-find-file-dwim)
+(setq projectile-switch-project-action #'custom-find-file)
 
 ;; Latex Preview folder
 (setq org-preview-latex-image-directory 
