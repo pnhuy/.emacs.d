@@ -98,3 +98,7 @@
       (concat temporary-file-directory "ltximg/"))
 ;; Config latex preview process list
 (setq org-preview-latex-default-process 'dvisvgm)
+
+;; Maximize window on startup
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
