@@ -65,6 +65,9 @@
 ;; load fzf config
 (load (expand-file-name "fzf.el" user-emacs-directory))
 
+;; load web mode config
+(load (expand-file-name "web.el" user-emacs-directory))
+
 (global-set-key (kbd "M-i") 'imenu)
 
 ;; undo tree mode
