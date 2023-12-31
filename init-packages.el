@@ -13,7 +13,8 @@
     treemacs-icons-dired
     treemacs-magit
     lsp-mode
-    lsp-treemacs 
+    lsp-treemacs
+    lsp-ui
     projectile 
     hydra flycheck company avy which-key helm-xref dap-mode
     exec-path-from-shell
@@ -24,6 +25,8 @@
     org-bullets
     org-fragtog
     undo-tree
+    web-mode
+    prettier-js
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
