@@ -88,6 +88,7 @@
 
 ;; Bind the keymap
 (global-set-key (kbd "C-x C-f") 'custom-find-file)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 ;; Projectile
 (setq projectile-switch-project-action #'custom-find-file)
