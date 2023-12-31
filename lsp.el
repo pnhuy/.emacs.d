@@ -59,6 +59,10 @@
 (setq lsp-ui-doc-position 'at-point)
 (setq lsp-ui-doc-show-with-mouse t)
 
+;; remap xref-find-definitions(M-.) and xref-find-references(M-?) to lsp-ui-peek
+(define-key lsp-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+(define-key lsp-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+
 ;; change hot key from enter to tab for company-complete-selection
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "<return>") nil)
