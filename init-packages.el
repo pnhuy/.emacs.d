@@ -27,6 +27,7 @@
     undo-tree
     web-mode
     prettier-js
+    tide
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
