@@ -28,6 +28,7 @@
     web-mode
     prettier-js
     tide
+    ein
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)

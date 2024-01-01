@@ -105,3 +105,9 @@
 ;; Maximize window on startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; emacs-ipython-notebook config
+(if (not (display-graphic-p))
+    ((setq ein:output-area-inlined-images nil)
+     (setq mailcap-user-mime-data '(((viewer . "open -a Preview.app %s") (type . "image/.*")))))
+    (setq ein:output-area-inlined-images t))
