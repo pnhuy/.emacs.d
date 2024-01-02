@@ -37,9 +37,10 @@
 (setq org-babel-python-command "python3")
 
 ;; turn on auto-save for org-mode
-(add-hook 'org-mode-hook 'auto-save-mode)
-(add-hook 'auto-save-hook 'org-save-all-org-buffers)
-(setq auto-save-interval 50)
+(add-hook 'org-mode-hook (lambda () 
+                            (auto-save-mode 1)
+                            (setq auto-save-interval 50)
+                            (add-hook 'auto-save-hook 'org-save-all-org-buffers)))
 
 ;; turn auto-revert-mode on for org
 (add-hook 'org-mode-hook 'auto-revert-mode)
