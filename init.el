@@ -111,3 +111,11 @@
     ((setq ein:output-area-inlined-images nil)
      (setq mailcap-user-mime-data '(((viewer . "open -a Preview.app %s") (type . "image/.*")))))
     (setq ein:output-area-inlined-images t))
+
+;; doc view setting
+;; ppi
+(setq doc-view-resolution 300)
+(setq doc-view-continuous t)
+;; disable line number
+(add-hook 'doc-view-mode-hook (lambda ()
+                                (display-line-numbers-mode -1)))
