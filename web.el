@@ -1,6 +1,10 @@
 ;; web-mode
+(require 'lsp-mode)
+(require 'prettier-js)
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-mode))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
@@ -46,7 +50,6 @@
     :indentSize 2
     :tabSize 2))
 
-(require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (add-hook 'web-mode-hook
           (lambda ()
@@ -54,3 +57,12 @@
               (setup-tide-mode))))
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+
+;; lsp for js2-mode
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (lsp-deferred)
+            (prettier-js-mode)
+            ;; change lsp-format-buffer key to prettier-js
+            (define-key lsp-mode-map [remap lsp-format-buffer] 'prettier-js)))
