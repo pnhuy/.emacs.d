@@ -37,7 +37,8 @@
 (setq org-babel-python-command "python3")
 
 ;; turn on auto-save for org-mode
-(add-hook 'org-mode-hook (lambda () 
+(add-hook 'org-mode-hook (lambda ()
+                            (require 'org-tempo)                            
                             (auto-save-mode 1)
                             (setq auto-save-interval 50)
                             (add-hook 'auto-save-hook 'org-save-all-org-buffers)))
@@ -46,3 +47,10 @@
 (add-hook 'org-mode-hook 'auto-revert-mode)
 (setq auto-revert-verbose nil)
 (setq auto-revert-use-notify nil)
+
+;; enable org-tempo in org-mode
+(add-to-list 'org-modules 'org-tempo t)
+
+;; disable electric-pair-mode in org-mode
+(add-hook 'org-mode-hook (lambda () (electric-pair-mode -1)))
+
