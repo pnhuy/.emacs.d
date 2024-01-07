@@ -29,6 +29,7 @@
     prettier-js
     tide
     ein
+    ligature
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)

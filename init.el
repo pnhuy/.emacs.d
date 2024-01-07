@@ -27,6 +27,10 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
+(cond
+ ((find-font (font-spec :name "JetBrainsMono Nerd Font Mono"))
+  (set-frame-font "JetBrainsMono Nerd Font Mono-12")))
+
 (setq c-default-style "bsd"
       c-basic-offset 4)
 
@@ -67,6 +71,9 @@
 
 ;; load web mode config
 (load (expand-file-name "web.el" user-emacs-directory))
+
+;; load ligature config
+(load (expand-file-name "ligature.el" user-emacs-directory))
 
 (global-set-key (kbd "M-i") 'imenu)
 
