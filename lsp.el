@@ -54,6 +54,7 @@
 (if (not (display-graphic-p))
     (progn
       (setq lsp-ui-doc-show-with-cursor t)
+      (setq lsp-ui-doc-enable nil)
       )
   )
 (setq lsp-ui-doc-position 'at-point)
