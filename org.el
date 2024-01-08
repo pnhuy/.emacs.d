@@ -1,5 +1,9 @@
 ;; load phscroll
-(add-to-list 'load-path (expand-file-name "packages/phscroll" user-emacs-directory))
+(use-package phscroll
+  :straight '(phscroll
+              :type git
+              :host github
+              :repo "misohena/phscroll"))
 (require 'phscroll)
 ;; uncomment the following line to enable phscroll in org-mode
 ;; (setq org-startup-truncated nil)
