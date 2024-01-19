@@ -54,7 +54,8 @@
 (add-hook 'web-mode-hook
           (lambda ()
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
+              (setup-tide-mode)
+              (define-key lsp-mode-map [remap lsp-format-buffer] 'prettier-js))))
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
 
@@ -64,5 +65,6 @@
           (lambda ()
             (lsp-deferred)
             (prettier-js-mode)
+            (setq js2-basic-offset 2)
             ;; change lsp-format-buffer key to prettier-js
             (define-key lsp-mode-map [remap lsp-format-buffer] 'prettier-js)))
