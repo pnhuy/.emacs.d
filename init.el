@@ -124,3 +124,8 @@
 ;; disable line number
 (add-hook 'doc-view-mode-hook (lambda ()
                                 (display-line-numbers-mode -1)))
+
+;; disable ls-dired on mac
+(when (string= system-type "darwin")       
+  (setq dired-use-ls-dired nil))
+
