@@ -65,7 +65,13 @@
 (define-key lsp-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 
 ;; change hot key from enter to tab for company-complete-selection
-(require 'company)
-(let ((map company-active-map))
+(use-package company
+  :ensure t
+  :config
+  (let ((map company-active-map))
     (define-key map (kbd "<tab>") 'company-complete-selection)
-    (define-key map (kbd "RET") 'nil))
+    (define-key map (kbd "RET") 'nil)))
+
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
