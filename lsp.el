@@ -75,3 +75,14 @@
 (use-package company-box
   :ensure t
   :hook (company-mode . company-box-mode))
+
+;; Copilot
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'copilot-mode)
+  ;; key binding for accept
+  (define-key copilot-mode-map (kbd "C-c C-a") 'copilot-accept-completion)
+  (define-key copilot-mode-map (kbd "C-c C-n") 'copilot-accept-completion-by-line)
+  )
