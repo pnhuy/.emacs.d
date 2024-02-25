@@ -75,6 +75,9 @@
 ;; load ligature config
 (load (expand-file-name "ligature.el" user-emacs-directory))
 
+;; load ligature config
+(load (expand-file-name "languages/python.el" user-emacs-directory))
+
 (global-set-key (kbd "M-i") 'imenu)
 
 ;; undo tree mode

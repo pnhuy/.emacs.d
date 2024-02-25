@@ -35,7 +35,11 @@
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 ;; optionally if you want to use debugger
-(use-package dap-mode :ensure t)
+(use-package dap-mode
+  :ensure t
+  ;; :hook
+  ;; (dap-stopped . (lambda (arg) (call-interactively #'dap-hydra)))
+)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 ;; optional if you want which-key integration
@@ -44,11 +48,11 @@
     :config
     (which-key-mode))
 
-(setq lsp-ui-sideline-enable t)
+(setq lsp-ui-sideline-enable nil)
 (setq lsp-ui-peek-enable t)
 (setq lsp-ui-doc-enable t)
 (setq lsp-headerline-breadcrumb-enable t)
-(setq lsp-ui-sideline-show-hover t)
+(setq lsp-ui-sideline-show-hover nil)
 
 ;; check if emacs no window mode
 (if (not (display-graphic-p))
