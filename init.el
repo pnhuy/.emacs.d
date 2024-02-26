@@ -132,3 +132,14 @@
 (when (string= system-type "darwin")       
   (setq dired-use-ls-dired nil))
 
+
+(use-package move-lines
+  :straight '(move-lines
+              :type git
+              :host github
+              :repo "targzeta/move-lines")
+  :config
+  (move-lines-binding)
+  ;; After this, you can move the line(s) up by M-p or M-<up>
+  ;; or down by M-n or M-<down>.
+)
