@@ -52,6 +52,8 @@
 ;; auto resolve symlinks
 (setq find-file-visit-truename t)
 
+;; load dired config
+(load (expand-file-name "packages/dired.el" user-emacs-directory))
 ;; load lsp-mode
 (load (expand-file-name "lsp.el" user-emacs-directory))
 
