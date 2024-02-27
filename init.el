@@ -1,42 +1,41 @@
+;; disable menu bar
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; set font
+(cond
+ ((find-font (font-spec :name "JetBrainsMono Nerd Font Mono"))
+  (set-frame-font "JetBrainsMono Nerd Font Mono-12")))
+
+;; load theme
+(load-theme 'material-light t)
+
+;; Maximize window on startup
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(setq make-backup-files nil) ; stop creating ~ files
+(setq create-lockfiles nil) ; stop creating # files
+(setq backup-directory-alist '(("." . (concat user-emacs-directory "backups"))))
+
 ;; config and load packages
 (setq custom-file (expand-file-name "package-selected-packages.el" user-emacs-directory))
 (load custom-file)
 (load (expand-file-name "init-packages.el" user-emacs-directory))
 
 ;; speed up startup
-
 ;; Minimize garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
-
 ;; Lower threshold back to 8 MiB (default is 800kB)
 (add-hook 'emacs-startup-hook
           (lambda ()
             (setq gc-cons-threshold (expt 2 23))))
-
 ;; end speed up startup
 
+;; get path from shell
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
-
-(setq make-backup-files nil) ; stop creating ~ files
-(setq create-lockfiles nil) ; stop creating # files
-(setq backup-directory-alist '(("." . (concat user-emacs-directory "backups"))))
-
-;; disable menu bar
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-
-(cond
- ((find-font (font-spec :name "JetBrainsMono Nerd Font Mono"))
-  (set-frame-font "JetBrainsMono Nerd Font Mono-12")))
-
-(setq c-default-style "bsd"
-      c-basic-offset 4)
-
-
-;; load theme
-(load-theme 'material-light t)
 
 ;; autocomplete paired brackets
 (electric-pair-mode 1)
@@ -75,7 +74,8 @@
 ;; load ligature config
 (load (expand-file-name "ligature.el" user-emacs-directory))
 
-;; load ligature config
+;; load language config
+(load (expand-file-name "languages/c.el" user-emacs-directory))
 (load (expand-file-name "languages/python.el" user-emacs-directory))
 
 (global-set-key (kbd "M-i") 'imenu)
@@ -99,9 +99,9 @@
               ("C-c p" . projectile-command-map)))
 
 ;; custom find file function
-(require 'helm-projectile)
 (defun custom-find-file ()
   "Wrapper function for finding files."
+  (require 'helm-projectile)
   (interactive)
   (if (and (fboundp 'projectile-project-p)
            (projectile-project-p))
@@ -120,10 +120,6 @@
       (concat temporary-file-directory "ltximg/"))
 ;; Config latex preview process list
 (setq org-preview-latex-default-process 'dvisvgm)
-
-;; Maximize window on startup
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; emacs-ipython-notebook config
 (setq ein:output-area-inlined-images (display-graphic-p))
@@ -159,3 +155,5 @@
   ;; After this, you can move the line(s) up by M-p or M-<up>
   ;; or down by M-n or M-<down>.
 )
+
+(global-set-key (kbd "C-x g") 'magit-status)
