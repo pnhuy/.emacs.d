@@ -157,3 +157,8 @@
 )
 
 (global-set-key (kbd "C-x g") 'magit-status)
+
+(use-package goto-line-preview
+  :ensure t
+  :config
+  (global-set-key [remap goto-line] 'goto-line-preview))
