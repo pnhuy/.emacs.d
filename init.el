@@ -89,6 +89,15 @@
 (add-hook 'prog-mode-hook 'git-gutter-mode)
 (custom-set-variables '(git-gutter:update-interval 0.5))
 
+(use-package projectile
+  :config
+  (projectile-mode +1)
+  :custom
+  (projectile-indexing-method 'alien)
+  :bind (:map projectile-mode-map
+              ;; ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+
 ;; custom find file function
 (require 'helm-projectile)
 (defun custom-find-file ()
