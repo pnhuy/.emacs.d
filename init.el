@@ -8,9 +8,6 @@
  ((find-font (font-spec :name "JetBrainsMono Nerd Font Mono"))
   (set-frame-font "JetBrainsMono Nerd Font Mono-12")))
 
-;; load theme
-(load-theme 'material-light t)
-
 ;; Maximize window on startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -20,18 +17,29 @@
 (setq backup-directory-alist '(("." . (concat user-emacs-directory "backups"))))
 
 ;; config and load packages
+;; check if package-selected-packages.el exists, if not create it
+(unless (file-exists-p (expand-file-name "package-selected-packages.el" user-emacs-directory))
+  (write-region "" nil (expand-file-name "package-selected-packages.el" user-emacs-directory)))
 (setq custom-file (expand-file-name "package-selected-packages.el" user-emacs-directory))
 (load custom-file)
 (load (expand-file-name "init-packages.el" user-emacs-directory))
 
-;; speed up startup
+;; load theme
+(if (display-graphic-p)
+    (load-theme 'material-light t)
+    ;; hightlight current line
+    (global-hl-line-mode 1))
+
+;; Speed up startup
+;; Don’t compact font caches during GC for doom-modeline
+(setq inhibit-compacting-font-caches t)
 ;; Minimize garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
 ;; Lower threshold back to 8 MiB (default is 800kB)
 (add-hook 'emacs-startup-hook
           (lambda ()
             (setq gc-cons-threshold (expt 2 23))))
-;; end speed up startup
+;; END Speed up startup
 
 ;; get path from shell
 (when (memq window-system '(mac ns x))
@@ -43,9 +51,6 @@
 ;; show line numbers
 (global-display-line-numbers-mode)
 
-;; hightlight current line
-(global-hl-line-mode 1)
-
 ;; disable startup screen
 (setq inhibit-startup-message t)
 
@@ -54,9 +59,12 @@
 
 ;; load dired config
 (load (expand-file-name "packages/dired.el" user-emacs-directory))
+
+;; load doom modeline
+(load (expand-file-name "packages/doom-modeline.el" user-emacs-directory))
+
 ;; load lsp-mode
 (load (expand-file-name "lsp.el" user-emacs-directory))
-
 
 ;; load treemacs
 (load (expand-file-name "treemacs.el" user-emacs-directory))
@@ -79,8 +87,6 @@
 ;; load language config
 (load (expand-file-name "languages/c.el" user-emacs-directory))
 (load (expand-file-name "languages/python.el" user-emacs-directory))
-
-(global-set-key (kbd "M-i") 'imenu)
 
 ;; undo tree mode
 (global-undo-tree-mode)
