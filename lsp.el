@@ -72,10 +72,11 @@
 ;; change hot key from enter to tab for company-complete-selection
 (use-package company
   :ensure t
-  :config
-  (let ((map company-active-map))
-    (define-key map (kbd "<tab>") 'company-complete-selection)
-    (define-key map (kbd "RET") 'nil)))
+  :bind (:map company-active-map
+              ("RET" . nil)
+              ("<return>" . nil)
+              ("TAB" . company-complete-selection)
+              ("<tab>" . company-complete-selection)))
 
 (use-package company-box
   :ensure t
