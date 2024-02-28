@@ -26,9 +26,10 @@
 
 ;; load theme
 (if (display-graphic-p)
-    (load-theme 'material-light t)
-    ;; hightlight current line
-    (global-hl-line-mode 1))
+    (lambda ()
+      (load-theme 'material-light t)
+      (global-hl-line-mode 1)))
+    
 
 ;; Speed up startup
 ;; Don’t compact font caches during GC for doom-modeline
