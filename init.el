@@ -60,6 +60,12 @@
 ;; auto resolve symlinks
 (setq find-file-visit-truename t)
 
+;; Exclude remote files from recentf
+(setq recentf-keep '(file-remote-p file-readable-p))
+
+;; Set waiting time for tramp
+(setq tramp-connection-timeout 5)
+
 ;; load dired config
 (load (expand-file-name "packages/dired.el" user-emacs-directory))
 
