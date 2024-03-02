@@ -26,10 +26,12 @@
 
 ;; load theme
 (if (display-graphic-p)
-    (lambda ()
+    (progn
+    ;; if graphic
       (load-theme 'material-light t)
-      (global-hl-line-mode 1)))
-    
+      (global-hl-line-mode 1))
+    ;; else (optional)
+    (load-theme 'wombat t))
 
 ;; Speed up startup
 ;; Don’t compact font caches during GC for doom-modeline
