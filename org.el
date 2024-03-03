@@ -58,3 +58,7 @@
 ;; disable electric-pair-mode in org-mode
 (add-hook 'org-mode-hook (lambda () (electric-pair-mode -1)))
 
+;; yasnippet for latex in org-mode
+(add-hook 'org-mode-hook (lambda () (yas-activate-extra-mode 'latex-mode)))
+
+
