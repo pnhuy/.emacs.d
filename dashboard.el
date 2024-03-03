@@ -1,5 +1,6 @@
 ;; use-package with package.el:
 (use-package dashboard
+  :if (< (length command-line-args) 2)
   :ensure t
   :config
   (dashboard-setup-startup-hook)
