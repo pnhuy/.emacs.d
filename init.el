@@ -179,3 +179,8 @@
   :ensure t
   :config
   (global-set-key [remap goto-line] 'goto-line-preview))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))

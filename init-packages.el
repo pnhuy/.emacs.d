@@ -32,6 +32,8 @@
     tide
     ein
     ligature
+    yasnippet
+    yasnippet-snippets
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
