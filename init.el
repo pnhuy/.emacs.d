@@ -31,7 +31,9 @@
       (load-theme 'material-light t)
       (global-hl-line-mode 1))
     ;; else (optional)
-    (load-theme 'wombat t))
+    (progn
+      (xterm-mouse-mode 1)
+      (load-theme 'wombat t)))
 
 ;; Speed up startup
 ;; Don’t compact font caches during GC for doom-modeline
