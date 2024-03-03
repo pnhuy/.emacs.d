@@ -10,7 +10,7 @@
 ;; (with-eval-after-load "org"
 ;;   (require 'org-phscroll))
 
-(setq org-adapt-indentation t)
+(setq org-adapt-indentation nil)
 (setq org-list-allow-alphabetical t)
 
 (require 'org-bullets)
