@@ -87,6 +87,7 @@
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
   :ensure t
   :config
+  (copilot-mode -1)
   (add-hook 'prog-mode-hook 'copilot-mode)
   ;; key binding for accept
   (define-key copilot-mode-map (kbd "C-c C-a") 'copilot-accept-completion)
