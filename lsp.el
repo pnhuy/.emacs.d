@@ -85,10 +85,12 @@
 ;; Copilot
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+  :hook (prog-mode . copilot-mode)
   :ensure t
   :config
   (copilot-mode -1)
-  (add-hook 'prog-mode-hook 'copilot-mode)
+  ;; disable warning
+  (setq copilot-indent-offset-warning-disable t)
   ;; key binding for accept
   (define-key copilot-mode-map (kbd "C-c C-a") 'copilot-accept-completion)
   (define-key copilot-mode-map (kbd "C-c C-n") 'copilot-accept-completion-by-line)
