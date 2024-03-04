@@ -74,6 +74,9 @@
 ;; load doom modeline
 (load (expand-file-name "packages/doom-modeline.el" user-emacs-directory))
 
+;; load ivy config
+(load (expand-file-name "packages/ivy.el" user-emacs-directory))
+
 ;; load lsp-mode
 (load (expand-file-name "lsp.el" user-emacs-directory))
 
@@ -133,7 +136,7 @@
 
 ;; Bind the keymap
 (global-set-key (kbd "C-x C-f") 'custom-find-file)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
+;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 ;; Projectile
 (setq projectile-switch-project-action #'custom-find-file)
