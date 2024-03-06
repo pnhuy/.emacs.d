@@ -1,3 +1,19 @@
+;; replace lsp-format-buffer with custom function
+(defun my-lsp-format-buffer ()
+  (interactive)
+  (if (or (eq major-mode 'html-mode)
+          (eq major-mode 'mhtml-mode)
+          (eq major-mode 'js2-mode)
+          (eq major-mode 'typescript-mode)
+          (eq major-mode 'json-mode))
+      (progn
+        (message "Running prettier-js")
+        (require 'prettier-js)
+        (prettier-js))
+      (progn
+        (message "Running lsp-format-buffer")
+        (lsp-format-buffer))))
+
 (use-package lsp-mode
   :ensure t
   :init
@@ -7,6 +23,7 @@
          ((c-mode c++-mode python-mode web-mode) . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
+  :bind (:map lsp-mode-map ("C-c l = =" . my-lsp-format-buffer))
   :commands lsp)
 
 ;; python mode
@@ -15,16 +32,6 @@
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp-deferred))))  ; or lsp
-
-;; json mode
-(use-package json-mode
-  :ensure t
-  :mode "\\.json\\'"
-  :config
-  (setq js-indent-level 2)
-  ;; chang hot key for json-pretty-print-buffer
-  (define-key json-mode-map (kbd "C-c l = =") 'json-pretty-print-buffer)
-  )
 
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode)
