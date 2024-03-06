@@ -98,6 +98,10 @@
 ;; load ligature config
 (load (expand-file-name "ligature.el" user-emacs-directory))
 
+;; load treesitter config
+(load (expand-file-name "packages/treesitter.el" user-emacs-directory))
+
+
 ;; load language config
 (load (expand-file-name "languages/c.el" user-emacs-directory))
 (load (expand-file-name "languages/python.el" user-emacs-directory))
