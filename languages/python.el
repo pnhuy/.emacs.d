@@ -1,31 +1,29 @@
-;; load file dap.el
 (load (expand-file-name "packages/dap.el" user-emacs-directory))
 
-;; function to find python virtualenv path like .venv .env env venv
 (defun find-venv ()
-  
-  (setq venv (if (file-exists-p ".venv")
-            ".venv"
-          (if (file-exists-p ".env")
-              ".env"
-            (if (file-exists-p "env")
-                "env"
-              (if (file-exists-p "venv")
-                  "venv"
-                nil
-  )))))
-  (if (and (not (eq venv nil)) (file-exists-p (concat (file-truename venv) "/bin/python")))
-      (concat (file-truename venv) "/bin/python")
-    (shell-command-to-string "which python3")
-    )
-)
+  "Find the python executable in the current project's virtual environment."
+  (require 'projectile)
+  (let* ((root-dir (or (projectile-project-root) (file-name-directory (buffer-file-name))))
+         (found-venv nil)) ; Initialize found-venv here
+    (cond ((file-directory-p (concat root-dir "/.venv"))
+             (setq found-venv (concat root-dir "/.venv")))
+          ((file-directory-p (concat root-dir "/.env"))
+             (setq found-venv (concat root-dir "/.env")))
+          ((file-directory-p (concat root-dir "/env"))
+             (setq found-venv (concat root-dir "/env")))
+          ((file-directory-p (concat root-dir "/venv"))
+             (setq found-venv (concat root-dir "/venv")))
+          ((and root-dir (file-exists-p (concat root-dir "/Pipfile")))
+             (setq found-venv (replace-regexp-in-string "\n" "" (shell-command-to-string "pipenv --quiet --venv")))))
+    (if (and found-venv (file-exists-p (concat found-venv "/bin/python")))
+        (concat (file-truename found-venv) "/bin/python")
+      (replace-regexp-in-string "\n" "" (shell-command-to-string "which python3")))))
 
-;; Run python setup if python mode is enabled
 (add-hook 'python-mode-hook
           (lambda ()
+            (message "Find python executable: %s" (find-venv))
             (dap-setup)
             (require 'dap-python)
             (setq dap-python-debugger 'debugpy)
-            (setq dap-python-executable (find-venv))
-          )
-)
+            (defun dap-python--pyenv-executable-find (command)
+              (find-venv))))
