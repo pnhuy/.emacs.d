@@ -197,16 +197,7 @@
   :config
   (yas-global-mode 1))
 
-(use-package diminish
+(use-package xclip
   :ensure t
   :config
-  (diminish 'git-gutter-mode)
-  (diminish 'undo-tree-mode)
-  (diminish 'eldoc-mode)
-  (diminish 'flycheck-mode)
-  (diminish 'yas-minor-mode)
-  (diminish 'which-key-mode)
-  (diminish 'company-mode)
-  (diminish 'copilot-mode)
-)
-
+  (xclip-mode 1))
