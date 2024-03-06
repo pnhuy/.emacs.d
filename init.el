@@ -93,7 +93,7 @@
 (load (expand-file-name "fzf.el" user-emacs-directory))
 
 ;; load web mode config
-(load (expand-file-name "web.el" user-emacs-directory))
+;; (load (expand-file-name "web.el" user-emacs-directory))
 
 ;; load ligature config
 (load (expand-file-name "ligature.el" user-emacs-directory))
@@ -101,6 +101,9 @@
 ;; load language config
 (load (expand-file-name "languages/c.el" user-emacs-directory))
 (load (expand-file-name "languages/python.el" user-emacs-directory))
+(load (expand-file-name "languages/html.el" user-emacs-directory))
+(load (expand-file-name "languages/js.el" user-emacs-directory))
+(load (expand-file-name "languages/json.el" user-emacs-directory))
 
 ;; load diminish config
 (load (expand-file-name "packages/diminish.el" user-emacs-directory))
