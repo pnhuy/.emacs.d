@@ -3,9 +3,9 @@
   :init (ivy-mode 1)
   :diminish ivy-mode
   :config
-  (setq ivy-use-virtual-buffers t
+  (setq ivy-use-virtual-buffers nil
         enable-recursive-minibuffers t
-	ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
+	      ivy-re-builders-alist '((ivy-switch-buffer . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy))
         ;;ivy-initial-inputs-alist nil
   ))
