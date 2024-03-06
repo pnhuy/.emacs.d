@@ -124,15 +124,20 @@
 (use-package projectile
   :ensure t
   :after helm
-  :config
-  (projectile-mode +1)
   :custom
   (require 'helm)
   (projectile-indexing-method 'alien)
   (projectile-completion-system 'helm)
   :bind (:map projectile-mode-map
               ;; ("s-p" . projectile-command-map)
-              ("C-c p" . projectile-command-map)))
+              ("C-c p" . projectile-command-map))
+  :config
+  (projectile-mode +1)
+  ;; check if projectile is enabled, change working dir to root of project
+  (add-hook 'projectile-after-switch-project-hook
+            (lambda ()
+              (setq default-directory (projectile-project-root))))
+  )
 
 ;; custom find file function
 (defun custom-find-file ()
