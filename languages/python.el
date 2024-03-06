@@ -19,11 +19,13 @@
         (concat (file-truename found-venv) "/bin/python")
       (replace-regexp-in-string "\n" "" (shell-command-to-string "which python3")))))
 
-(add-hook 'python-mode-hook
-          (lambda ()
+(defun setup-python-dap ()
             (message "Find python executable: %s" (find-venv))
             (dap-setup)
             (require 'dap-python)
             (setq dap-python-debugger 'debugpy)
             (defun dap-python--pyenv-executable-find (command)
-              (find-venv))))
+              (find-venv)))
+
+(add-hook 'python-mode-hook 'setup-python-dap)
+(add-hook 'python-ts-mode-hook 'setup-python-dap)
