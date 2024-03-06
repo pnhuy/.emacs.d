@@ -102,6 +102,9 @@
 (load (expand-file-name "languages/c.el" user-emacs-directory))
 (load (expand-file-name "languages/python.el" user-emacs-directory))
 
+;; load diminish config
+(load (expand-file-name "packages/diminish.el" user-emacs-directory))
+
 ;; undo tree mode
 (global-undo-tree-mode)
 (setq undo-tree-auto-save-history t)
