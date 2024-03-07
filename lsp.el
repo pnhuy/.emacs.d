@@ -1,11 +1,13 @@
 ;; replace lsp-format-buffer with custom function
 (defun my-lsp-format-buffer ()
   (interactive)
-  (if (or (eq major-mode 'html-mode)
+  (if (or (string-prefix-p "html" (symbol-name major-mode))
+          (string-prefix-p "json" (symbol-name major-mode))
+          (string-prefix-p "jtsx" (symbol-name major-mode))
+          (string-prefix-p "css" (symbol-name major-mode))
           (eq major-mode 'mhtml-mode)
           (eq major-mode 'js2-mode)
-          (eq major-mode 'typescript-mode)
-          (eq major-mode 'json-mode))
+      )
       (progn
         (message "Running prettier-js")
         (require 'prettier-js)
@@ -19,8 +21,7 @@
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         ((c-mode c++-mode python-mode web-mode) . lsp)
+  :hook ((prog-mode . lsp-deferred)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :bind (:map lsp-mode-map ("C-c l = =" . my-lsp-format-buffer))
@@ -54,6 +55,15 @@
     :ensure t
     :config
     (which-key-mode))
+
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.venv\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.env\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]env\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]node_modules\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]__pycache__\\'")
+)
 
 (setq lsp-ui-sideline-enable nil)
 (setq lsp-ui-peek-enable t)
