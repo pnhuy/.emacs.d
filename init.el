@@ -12,7 +12,12 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(setq make-backup-files nil) ; stop creating ~ files
+(load (expand-file-name "packages/no-littering.el" user-emacs-directory))
+
+;; Disable backup files.
+(setf make-backup-files nil)
+;; Prompt to delete autosaves when killing buffers.
+(setf kill-buffer-delete-auto-save-files t)
 (setq create-lockfiles nil) ; stop creating # files
 (setq backup-directory-alist '(("." . (concat user-emacs-directory "backups"))))
 
@@ -32,7 +37,7 @@
       (global-hl-line-mode 1))
     ;; else (optional)
     (progn
-      (xterm-mouse-mode 1)
+      (xterm-mouse-mode -1)
       (load-theme 'wombat t)))
 
 ;; Speed up startup
@@ -215,3 +220,6 @@
   :ensure t
   :config
   (xclip-mode 1))
+
+(use-package restart-emacs
+  :ensure t)

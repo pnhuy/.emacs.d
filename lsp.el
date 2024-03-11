@@ -27,13 +27,6 @@
   :bind (:map lsp-mode-map ("C-c l = =" . my-lsp-format-buffer))
   :commands lsp)
 
-;; python mode
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp-deferred))))  ; or lsp
-
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode)
 ;; if you are helm user

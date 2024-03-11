@@ -29,3 +29,17 @@
 
 (add-hook 'python-mode-hook 'setup-python-dap)
 (add-hook 'python-ts-mode-hook 'setup-python-dap)
+
+(defun setup-pyright ()
+   (require 'lsp-pyright)
+   (message "Load pyright")
+   (lsp-deferred))
+
+(use-package lsp-pyright
+  :ensure t
+  :hook
+  (python-mode . setup-pyright)
+  (python-ts-mode . setup-pyright)
+  :config
+  (setq lsp-pyright-multi-root nil)
+)
