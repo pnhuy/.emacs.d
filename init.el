@@ -214,6 +214,7 @@
 (use-package yasnippet
   :ensure t
   :config
+  (add-to-list 'yas-snippet-dirs (expand-file-name "snippets" user-emacs-directory) t)
   (yas-global-mode 1))
 
 (use-package xclip

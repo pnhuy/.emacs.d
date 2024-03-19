@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: theorem
+# key: \par
+# --
+\partial $0
