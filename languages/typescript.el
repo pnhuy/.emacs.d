@@ -1,12 +1,16 @@
 (use-package jtsx
   :ensure t
-  :mode (("\\.jsx?\\'" . jtsx-jsx-mode)
+  :mode (("\\.jsx\\'" . jtsx-jsx-mode)
          ("\\.tsx\\'" . jtsx-tsx-mode)
          ("\\.ts\\'" . jtsx-typescript-mode))
   :commands jtsx-install-treesit-language
   :hook ((jtsx-jsx-mode . hs-minor-mode)
          (jtsx-tsx-mode . hs-minor-mode)
-         (jtsx-typescript-mode . hs-minor-mode))
+         (jtsx-typescript-mode . hs-minor-mode)
+         (jtsx-jsx-mode . lsp-mode)
+         (jtsx-tsx-mode . lsp-mode)
+         (jtsx-typescript-mode . lsp-mode)
+         )
   :custom
   ;; Optional customizations
   (js-indent-level 2)
@@ -23,6 +27,8 @@
   (lsp-deferred)
   (defun jtsx-bind-keys-to-mode-map (mode-map)
     "Bind keys to MODE-MAP."
+    (define-key mode-map (kbd "M-.") 'lsp-find-definition)
+    (define-key mode-map (kbd "M-?") 'lsp-find-references)
     (define-key mode-map (kbd "C-c C-j") 'jtsx-jump-jsx-element-tag-dwim)
     (define-key mode-map (kbd "C-c j o") 'jtsx-jump-jsx-opening-tag)
     (define-key mode-map (kbd "C-c j c") 'jtsx-jump-jsx-closing-tag)
