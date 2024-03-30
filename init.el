@@ -115,6 +115,7 @@
 (load (expand-file-name "languages/js.el" user-emacs-directory))
 (load (expand-file-name "languages/json.el" user-emacs-directory))
 (load (expand-file-name "languages/typescript.el" user-emacs-directory))
+(load (expand-file-name "languages/tex.el" user-emacs-directory))
 
 ;; load diminish config
 (load (expand-file-name "packages/diminish.el" user-emacs-directory))
