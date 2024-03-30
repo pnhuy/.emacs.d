@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: example
+# name: latex_example
 # key: <eg
 # --
 \begin{example}

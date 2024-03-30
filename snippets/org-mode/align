@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: definition
+# name: align_star
 # key: <align*
 # --
 \begin{align*}
