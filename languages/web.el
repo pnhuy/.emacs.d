@@ -13,6 +13,7 @@
         web-mode-enable-auto-pairing t
         web-mode-enable-auto-opening t
         )
+  (setq web-mode-content-types-alist '(("jsx"  . "\\.js[x]?\\'")))
   ;; eval lsp after web-mode is loaded
   (eval-after-load 'web-mode
     '(progn
