@@ -14,9 +14,11 @@
         web-mode-enable-auto-opening t
         )
   (setq web-mode-content-types-alist '(("jsx"  . "\\.js[x]?\\'")))
+  ;; hot key for prettier-js
+  (define-key web-mode-map (kbd "C-c l = =") 'prettier-js)
   ;; eval lsp after web-mode is loaded
-  (eval-after-load 'web-mode
-    '(progn
-       (require 'lsp)
-       (add-hook 'web-mode-hook #'lsp-deferred)))
+  ;; (eval-after-load 'web-mode
+  ;;   '(progn
+  ;;      (require 'lsp)
+  ;;      (add-hook 'web-mode-hook #'lsp-deferred)))
 )
