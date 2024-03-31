@@ -212,7 +212,10 @@
   :ensure t
   :config
   (add-to-list 'yas-snippet-dirs (expand-file-name "snippets" user-emacs-directory) t)
-  (yas-global-mode 1))
+  ;; enable for org and latex
+  (add-hook 'org-mode-hook 'yas-minor-mode)
+  (add-hook 'LaTeX-mode-hook 'yas-minor-mode)
+)
 
 (use-package xclip
   :ensure t
