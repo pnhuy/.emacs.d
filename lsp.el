@@ -82,6 +82,9 @@
 ;; change hot key from enter to tab for company-complete-selection
 (use-package company
   :ensure t
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0)
   :bind (:map company-active-map
               ("RET" . nil)
               ("<return>" . nil)

@@ -7,6 +7,7 @@
          ("\\.js\\'" . web-mode))
   :config
   (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'company-mode)
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2
