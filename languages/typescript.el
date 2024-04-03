@@ -1,6 +1,13 @@
-(setq typescript-indent-level 2)
-(setq typescript-ts-mode-indent-offset 2)
-(setq treesit-font-lock-level 2)
+(defun setup-typescript ()
+  (setq typescript-indent-level 2)
+  (setq typescript-ts-mode-indent-offset 2)
+  (setq treesit-font-lock-level 2)
+  (require 'lsp-mode)
+  (lsp-deferred)
+)
+
+(add-hook 'typescript-mode-hook 'setup-typescript)
+(add-hook 'tsx-mode-hook 'setup-typescript)
 
 ;; if you use treesitter based typescript-ts-mode (emacs 29+)
 ;; (use-package js2-mode

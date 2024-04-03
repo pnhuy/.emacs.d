@@ -16,7 +16,8 @@
   :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'" . web-mode)
          ("\\.jsx?\\'" . web-mode)
-         ("\\.tsx?\\'" . web-mode))
+        ;;  ("\\.tsx?\\'" . web-mode))
+  )
   :hook
   (web-mode . prettier-js-mode)
   (web-mode . company-mode)

@@ -12,7 +12,8 @@
   :custom
   (treesit-auto-install 'prompt)
   :diminish treesit-auto
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+  ;; disable because conflicts with lsp typescript
+  ;; :config
+  ;; (treesit-auto-add-to-auto-mode-alist 'all)
+)
 

@@ -5,6 +5,7 @@
           (string-prefix-p "json" (symbol-name major-mode))
           (string-prefix-p "jtsx" (symbol-name major-mode))
           (string-prefix-p "css" (symbol-name major-mode))
+          (string-prefix-p "typescript" (symbol-name major-mode))
           (eq major-mode 'mhtml-mode)
           (eq major-mode 'js2-mode)
       )
