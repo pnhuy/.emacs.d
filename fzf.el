@@ -21,3 +21,11 @@
         fzf/position-bottom t
         ;; fzf/window-height 15
         ))
+
+;; run counsel-rg with project root
+(defun counsel-rg-project-root ()
+  (interactive)
+  (counsel-rg nil (projectile-project-root)))
+
+;; keymap for counsel-rg-project-root
+(global-set-key (kbd "C-t") 'counsel-rg-project-root)
