@@ -8,6 +8,13 @@
  ((find-font (font-spec :name "JetBrainsMono Nerd Font Mono"))
   (set-frame-font "JetBrainsMono Nerd Font Mono-12")))
 
+;; make scroll more smooth, pixel scroll
+(setq redisplay-dont-pause t
+      scroll-margin 1
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
+
 ;; Maximize window on startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
