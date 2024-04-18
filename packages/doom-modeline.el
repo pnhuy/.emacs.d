@@ -22,4 +22,7 @@
 (use-package doom-modeline
   :if (display-graphic-p)
   :ensure t
+  :custom
+  (doom-modeline-enable-word-count nil)
+  (inhibit-compacting-font-caches t)
   :init (doom-modeline-mode 1))
