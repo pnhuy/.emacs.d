@@ -76,6 +76,7 @@
 ;; load dired config
 (load (expand-file-name "packages/dired.el" user-emacs-directory))
 (load (expand-file-name "packages/neotree.el" user-emacs-directory))
+(load (expand-file-name "packages/org-roam.el" user-emacs-directory))
 
 ;; load doom modeline
 (load (expand-file-name "packages/doom-modeline.el" user-emacs-directory))
