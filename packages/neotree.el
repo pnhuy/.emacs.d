@@ -2,9 +2,9 @@
   "Attach the global neotree buffer"
   (when neo-global--autorefresh-timer
     (cancel-timer neo-global--autorefresh-timer))
-  (when neo-autorefresh
-    (setq neo-global--autorefresh-timer
-          (run-with-idle-timer 0.01 t 'neo-global--do-autorefresh)))
+  ;; (when neo-autorefresh
+  ;;   (setq neo-global--autorefresh-timer
+  ;;         (run-with-idle-timer 0.01 t 'neo-global--do-autorefresh)))
   (setq neo-global--buffer (get-buffer neo-buffer-name))
   (setq neo-global--window (get-buffer-window
                             neo-global--buffer))
