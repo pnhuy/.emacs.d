@@ -235,3 +235,17 @@
 
 (use-package restart-emacs
   :ensure t)
+
+;; key to copy current line to lower line
+(defun copy-line-down ()
+  "Copy the current line to the line below."
+  (interactive)
+  (save-excursion
+    (let ((line (buffer-substring (line-beginning-position)
+                                  (line-end-position))))
+      (forward-line)
+      (insert line)
+      (insert "\n")
+      )))
+(global-set-key (kbd "C-c d") 'copy-line-down)
+
