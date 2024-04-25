@@ -249,3 +249,6 @@
       )))
 (global-set-key (kbd "C-c d") 'copy-line-down)
 
+;; C-; to comment line or region
+(global-set-key (kbd "C-;") 'comment-line)
+
