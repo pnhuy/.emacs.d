@@ -252,3 +252,6 @@
 ;; C-; to comment line or region
 (global-set-key (kbd "C-;") 'comment-line)
 
+(use-package multi-vterm
+  :ensure t)
+
