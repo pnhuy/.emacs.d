@@ -124,6 +124,9 @@
 (load (expand-file-name "languages/typescript.el" user-emacs-directory))
 (load (expand-file-name "languages/web.el" user-emacs-directory))
 (load (expand-file-name "languages/tex.el" user-emacs-directory))
+(load (expand-file-name "languages/dart.el" user-emacs-directory))
+(load (expand-file-name "languages/yaml.el" user-emacs-directory))
+(load (expand-file-name "languages/docker.el" user-emacs-directory))
 
 ;; load diminish config
 (load (expand-file-name "packages/diminish.el" user-emacs-directory))
@@ -223,7 +226,7 @@
 (use-package yasnippet
   :ensure t
   :config
-  (add-to-list 'yas-snippet-dirs (expand-file-name "snippets" user-emacs-directory) t)
+  (add-to-list 'yas-snippet-dirs (expand-file-name "lumie" user-emacs-directory) t)
   ;; enable for org and latex
   (add-hook 'org-mode-hook 'yas-minor-mode)
   (add-hook 'LaTeX-mode-hook 'yas-minor-mode)
@@ -250,9 +253,28 @@
       )))
 (global-set-key (kbd "C-c d") 'copy-line-down)
 
+;; key to copy upper line to current line
+(defun copy-line-up ()
+  "Copy the line above the current line."
+  (interactive)
+  (move-beginning-of-line 1)
+  (previous-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank))
+(global-set-key (kbd "C-c u") 'copy-line-up)
+
 ;; C-; to comment line or region
 (global-set-key (kbd "C-;") 'comment-line)
 
-(use-package multi-vterm
-  :ensure t)
+;; autosaving for prog-mode
+(add-hook 'prog-mode-hook 'auto-save-visited-mode)
+;; auto revert
+(global-auto-revert-mode 1)
 
+;; key for movement
+(require 'viper-cmd)
+(global-set-key (kbd "M-f") 'viper-forward-word)
+(global-set-key (kbd "M-b") 'viper-backward-word)
