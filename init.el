@@ -120,6 +120,7 @@
 (load (expand-file-name "languages/python.el" user-emacs-directory))
 (load (expand-file-name "languages/html.el" user-emacs-directory))
 (load (expand-file-name "languages/json.el" user-emacs-directory))
+(load (expand-file-name "languages/js.el" user-emacs-directory))
 (load (expand-file-name "languages/typescript.el" user-emacs-directory))
 (load (expand-file-name "languages/web.el" user-emacs-directory))
 (load (expand-file-name "languages/tex.el" user-emacs-directory))

@@ -15,11 +15,11 @@
   :init
   :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'" . web-mode)
-         ("\\.jsx?\\'" . web-mode)
+        ;;  ("\\.jsx?\\'" . web-mode)
         ;;  ("\\.tsx?\\'" . web-mode))
   )
   :hook
-  (web-mode . prettier-js-mode)
+  ;; (web-mode . prettier-js-mode)
   (web-mode . company-mode)
   (web-mode . flycheck-mode)
   :custom
@@ -27,10 +27,12 @@
   (web-mode-css-indent-offset 2)
   (web-mode-code-indent-offset 2)
   (js-indent-level 2)
-  (web-mode-enable-auto-pairing t)
+  (web-mode-enable-auto-pairing nil)
   (web-mode-enable-auto-opening t)
+  (web-mode-enable-auto-closing t)
   (web-mode-content-types-alist '(("jsx"  . "\\.js[x]?\\'")))
   :config
+  (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
   (require 'prettier-js)
   (require 'flycheck)
   (flycheck-add-mode 'javascript-eslint 'web-mode)
