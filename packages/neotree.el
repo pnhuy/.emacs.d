@@ -29,3 +29,9 @@
   ;; enable resize
   (setq neo-window-fixed-size nil)
   )
+
+(use-package ranger
+  :ensure t
+  :config
+  (global-set-key (kbd "C-x t r") 'ranger)
+  )
