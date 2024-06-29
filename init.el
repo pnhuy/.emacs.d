@@ -275,3 +275,5 @@
 (require 'viper-cmd)
 (global-set-key (kbd "M-f") 'viper-forward-word)
 (global-set-key (kbd "M-b") 'viper-backward-word)
+(setq viper-inhibit-startup-message 't)
+(setq viper-expert-level '3)
