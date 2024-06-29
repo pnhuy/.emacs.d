@@ -3,26 +3,24 @@
 (package-initialize)
 
 (setq package-selected-packages
-  '(material-theme
+  '(no-littering
+    material-theme
     helm
     helm-lsp
     helm-projectile
     magit
     treemacs
-    treemacs-projectile
     treemacs-icons-dired
-    treemacs-magit
     lsp-mode
     lsp-treemacs
     lsp-ui
     projectile 
     hydra flycheck 
     company company-box
-    avy which-key helm-xref dap-mode
+    which-key helm-xref dap-mode
     exec-path-from-shell
     evil
     typescript-mode tree-sitter tree-sitter-langs
-    fzf
     git-gutter
     org-bullets
     org-fragtog

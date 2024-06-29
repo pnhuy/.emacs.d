@@ -106,9 +106,6 @@
 ;; load dashboard config
 (load (expand-file-name "dashboard.el" user-emacs-directory))
 
-;; load fzf config
-(load (expand-file-name "fzf.el" user-emacs-directory))
-
 ;; load ligature config
 (load (expand-file-name "ligature.el" user-emacs-directory))
 
