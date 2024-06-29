@@ -5,33 +5,9 @@
 (setq package-selected-packages
   '(no-littering
     material-theme
-    helm
-    helm-lsp
-    helm-projectile
-    magit
-    treemacs
-    treemacs-icons-dired
-    lsp-mode
-    lsp-treemacs
-    lsp-ui
-    projectile 
-    hydra flycheck 
-    company company-box
-    which-key helm-xref dap-mode
+    flycheck 
     exec-path-from-shell
-    evil
-    typescript-mode tree-sitter tree-sitter-langs
-    git-gutter
-    org-bullets
-    org-fragtog
-    undo-tree
-    web-mode
     prettier-js
-    tide
-    ein
-    ligature
-    yasnippet
-    yasnippet-snippets
     ))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)

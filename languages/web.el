@@ -1,3 +1,5 @@
+(use-package tide :ensure t)
+
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)

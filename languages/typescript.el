@@ -1,3 +1,4 @@
+(use-package typescript-mode :ensure t)
 (defun setup-typescript ()
   (setq typescript-indent-level 2)
   (setq typescript-ts-mode-indent-offset 2)

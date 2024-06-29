@@ -129,13 +129,18 @@
 (load (expand-file-name "packages/diminish.el" user-emacs-directory))
 
 ;; undo tree mode
+(use-package undo-tree :ensure t)
 (global-undo-tree-mode)
 ;; (setq undo-tree-auto-save-history t)
 (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
 ;; git-gutter
-(add-hook 'prog-mode-hook 'git-gutter-mode)
-(custom-set-variables '(git-gutter:update-interval 0.5))
+(use-package git-gutter
+  :ensure t
+  :hook
+  (prog-mode . git-gutter-mode)
+  :config
+  (custom-set-variables '(git-gutter:update-interval 0.5)))
 
 (use-package projectile
   :ensure t
@@ -154,6 +159,8 @@
             (lambda ()
               (setq default-directory (projectile-project-root))))
   )
+
+(use-package helm-projectile :ensure t)
 
 ;; custom find file function
 (defun custom-find-file ()
@@ -179,6 +186,7 @@
 (setq org-preview-latex-default-process 'dvisvgm)
 
 ;; emacs-ipython-notebook config
+(use-package ein :ensure t)
 (setq ein:output-area-inlined-images (display-graphic-p))
 (setq mailcap-user-mime-data '(((viewer . "open -a Preview.app %s") (type . "image/.*"))))
 
@@ -213,6 +221,7 @@
   ;; or down by M-n or M-<down>.
 )
 
+(use-package magit :ensure t)
 (global-set-key (kbd "C-x g") 'magit-status)
 
 (use-package goto-line-preview
@@ -228,6 +237,8 @@
   (add-hook 'org-mode-hook 'yas-minor-mode)
   (add-hook 'LaTeX-mode-hook 'yas-minor-mode)
 )
+
+(use-package yasnippet-snippets :ensure t)
 
 (use-package xclip
   :ensure t

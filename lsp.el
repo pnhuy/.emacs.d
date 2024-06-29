@@ -60,6 +60,7 @@
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode)
 ;; if you are helm user
+(use-package helm :ensure t)
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)

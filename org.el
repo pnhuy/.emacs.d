@@ -10,6 +10,8 @@
 ;; (with-eval-after-load "org"
 ;;   (require 'org-phscroll))
 
+(use-package org-bullets :ensure t)
+
 (defun org-table-collapse-cell ()
   (interactive)
   (save-excursion ;; Save point
