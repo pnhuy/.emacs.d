@@ -27,23 +27,34 @@
       orig-result)))
 (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
 
-;; replace lsp-format-buffer with custom function
+(defun ruff-lint-format-dwim ()
+  "Run ruff lint and format."
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (if (and file-name (string-match-p "\\.py\\'" file-name))
+      (let ((ruff-lint-output (shell-command-to-string (format "ruff check --select I --fix %s" file-name))))
+        (message "Ruff lint output: %s" ruff-lint-output)
+        (let ((ruff-format-output (shell-command-to-string (format "ruff format %s" file-name))))
+          (message "Ruff format output: %s" ruff-format-output)
+          (when (or (string-match-p "fixed" ruff-lint-output)
+                    (string-match-p "reformatted" ruff-format-output))
+            (progn
+              (revert-buffer t t t)
+              (message "Changes made.")))))
+      (message "Not a Python file."))))
+
 (defun my-lsp-format-buffer ()
   (interactive)
-  (if (or (string-prefix-p "html" (symbol-name major-mode))
+  (if (eq major-mode 'python-mode)
+      (ruff-lint-format-dwim)
+    (if (or (string-prefix-p "html" (symbol-name major-mode))
           (string-prefix-p "json" (symbol-name major-mode))
           (string-prefix-p "jtsx" (symbol-name major-mode))
           (string-prefix-p "css" (symbol-name major-mode))
           (string-prefix-p "typescript" (symbol-name major-mode))
           (eq major-mode 'mhtml-mode)
-          (eq major-mode 'js2-mode)
-      )
-      (progn
-        (message "Running prettier-js")
-        (require 'prettier-js)
-        (prettier-js))
-      (progn
-        (message "Running lsp-format-buffer")
+          (eq major-mode 'js2-mode))
+        (prettier-js)
         (lsp-format-buffer))))
 
 (use-package lsp-mode
