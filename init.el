@@ -288,3 +288,7 @@
 (global-set-key (kbd "M-b") 'viper-backward-word)
 (setq viper-inhibit-startup-message 't)
 (setq viper-expert-level '3)
+
+;; code folding
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+(global-set-key (kbd "C-c h") 'hs-hide-block)
