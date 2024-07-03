@@ -145,10 +145,6 @@
 (use-package projectile
   :ensure t
   :after helm
-  :custom
-  (require 'helm)
-  (projectile-indexing-method 'alien)
-  (projectile-completion-system 'helm)
   :bind (:map projectile-mode-map
               ;; ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map))
@@ -165,7 +161,6 @@
 ;; custom find file function
 (defun custom-find-file ()
   "Wrapper function for finding files."
-  (require 'helm-projectile)
   (interactive)
   (if (and (fboundp 'projectile-project-p)
            (projectile-project-p))

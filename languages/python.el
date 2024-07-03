@@ -2,7 +2,7 @@
 
 (defun find-venv ()
   "Find the python executable in the current project's virtual environment."
-  (require 'projectile)
+;;   (require 'projectile)
   (let* ((root-dir (or (projectile-project-root) (file-name-directory (buffer-file-name))))
          (found-venv nil)) ; Initialize found-venv here
     (cond ((file-directory-p (concat root-dir "/.venv"))
@@ -33,7 +33,7 @@
 (add-hook 'python-ts-mode-hook 'setup-python-dap)
 
 (defun setup-pyright ()
-   (require 'lsp-pyright)
+   ;; (require 'lsp-pyright)
    (message "Load pyright")
    (lsp-deferred))
 
