@@ -61,6 +61,9 @@
             (setq gc-cons-threshold (expt 2 23))))
 ;; END Speed up startup
 
+;; Increase the amount of data which Emacs reads from the process
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
 ;; get path from shell
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
