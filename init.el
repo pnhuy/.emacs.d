@@ -290,3 +290,9 @@
 ;; code folding
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (global-set-key (kbd "C-c h") 'hs-hide-block)
+
+;; recentf stuff
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
