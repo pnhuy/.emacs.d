@@ -71,6 +71,9 @@
 ;; autocomplete paired brackets
 (electric-pair-mode 1)
 
+;; disable auto pair at the beginning of word
+(setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
+
 ;; show line numbers
 (global-display-line-numbers-mode)
 
