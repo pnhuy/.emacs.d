@@ -1,5 +1,0 @@
-(use-package treemacs :ensure t)
-(use-package treemacs-icons-dired :ensure t)
-(use-package lsp-treemacs :ensure t)
-(global-set-key (kbd "C-x t s") 'lsp-treemacs-symbols)
-(global-set-key (kbd "C-x t r") 'lsp-treemacs-references)

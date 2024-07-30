@@ -15,11 +15,12 @@
 (use-package neotree
   :ensure t
   :config
-  (global-set-key (kbd "C-x t t") 'neotree-toggle)
   ;; change file path to current file view
   (setq neo-smart-open t)
   ;; auto refresh
   (setq neo-autorefresh t)
+  ;; time to auto refresh
+  (setq neo-autorefresh-interval 1)
   ;; theme 
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   ;; highlight current file in tree
@@ -35,3 +36,27 @@
   :config
   (global-set-key (kbd "C-x t r") 'ranger)
   )
+
+(use-package treemacs
+  :ensure t
+  :config
+  ;; show current project only
+  (treemacs-project-follow-mode 1)
+  (setq treemacs-display-current-project-exclusively t)
+)
+(use-package treemacs-icons-dired :ensure t)
+(use-package lsp-treemacs :ensure t)
+(global-set-key (kbd "C-x t s") 'lsp-treemacs-symbols)
+(global-set-key (kbd "C-x t r") 'lsp-treemacs-references)
+
+(defun open-file-manager ()
+  "Open file manager"
+  "If projectile is enabled, open current project root with treemacs, else open neotree"
+  (interactive)
+  (if (and (fboundp 'projectile-project-p)
+           (projectile-project-p))
+      (treemacs)
+    (neotree-toggle))  
+  )
+
+(global-set-key (kbd "C-x t t") 'open-file-manager)

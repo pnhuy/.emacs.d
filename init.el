@@ -104,7 +104,7 @@
 (load (expand-file-name "lsp.el" user-emacs-directory))
 
 ;; load treemacs
-(load (expand-file-name "treemacs.el" user-emacs-directory))
+;; (load (expand-file-name "treemacs.el" user-emacs-directory))
 
 ;; load org mode config
 (load (expand-file-name "org.el" user-emacs-directory))
