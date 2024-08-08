@@ -12,4 +12,6 @@
          ("C-c n j" . org-roam-dailies-capture-today))
   :config
   (org-roam-db-autosync-mode)
+  ;; open link in same window
+	(setq org-link-frame-setup '((file . find-file)))
   )
