@@ -45,6 +45,7 @@
 
 (defun my-lsp-format-buffer ()
   (interactive)
+  (save-buffer)
   (if (eq major-mode 'python-mode)
       (ruff-lint-format-dwim)
     (if (or (string-prefix-p "html" (symbol-name major-mode))
