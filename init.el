@@ -283,6 +283,8 @@
 
 ;; autosaving for prog-mode
 (add-hook 'prog-mode-hook 'auto-save-visited-mode)
+;; interval for autosave
+(setq auto-save-visited-interval 30) ;; 30 seconds
 ;; auto revert
 (global-auto-revert-mode 1)
 

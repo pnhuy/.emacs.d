@@ -60,3 +60,4 @@
   )
 
 (global-set-key (kbd "C-x t t") 'open-file-manager)
+(global-set-key (kbd "s-b") 'open-file-manager)
