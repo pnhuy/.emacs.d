@@ -43,15 +43,18 @@
 (load (expand-file-name "init-packages.el" user-emacs-directory))
 
 ;; load theme
+(use-package doom-themes 
+  :ensure t
+  :config
+  (load-theme 'doom-one t))
+
 (if (display-graphic-p)
     (progn
     ;; if graphic
-      (load-theme 'material-light)
       (global-hl-line-mode 1))
     ;; else (optional)
     (progn
-      (xterm-mouse-mode -1)
-      (load-theme 'wombat)))
+      (xterm-mouse-mode -1)))
 
 ;; Speed up startup
 ;; Don’t compact font caches during GC for doom-modeline
