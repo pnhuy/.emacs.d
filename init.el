@@ -3,6 +3,9 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
+;; disable native comp warning
+(setq native-comp-async-report-warnings-errors nil)
+
 ;; set font
 (cond
  ((find-font (font-spec :name "JetBrainsMono Nerd Font Mono"))
@@ -233,7 +236,6 @@
 (use-package yasnippet
   :ensure t
   :config
-  (add-to-list 'yas-snippet-dirs (expand-file-name "lumie" user-emacs-directory) t)
   ;; enable for org and latex
   (add-hook 'org-mode-hook 'yas-minor-mode)
   (add-hook 'LaTeX-mode-hook 'yas-minor-mode)
