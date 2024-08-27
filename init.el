@@ -91,6 +91,8 @@
 
 ;; Exclude remote files from recentf
 (setq recentf-keep '(file-remote-p file-readable-p))
+;; Exclude files having ".emacs.d" from recentf
+(setq recentf-exclude '("emacs.d"))
 
 ;; Set waiting time for tramp
 (setq tramp-connection-timeout 5)
@@ -299,4 +301,3 @@
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
