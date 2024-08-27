@@ -54,6 +54,7 @@
           (string-prefix-p "css" (symbol-name major-mode))
           (string-prefix-p "typescript" (symbol-name major-mode))
           (eq major-mode 'mhtml-mode)
+          (eq major-mode 'web-mode)
           (eq major-mode 'js2-mode))
         (prettier-js)
         (lsp-format-buffer))))
@@ -67,6 +68,8 @@
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :bind (:map lsp-mode-map ("C-c l = =" . my-lsp-format-buffer))
+  :config
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   :commands lsp)
 
 ;; optionally
@@ -109,8 +112,9 @@
 (use-package company
   :ensure t
   :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)
+  (company-minimum-prefix-length 2)
+  (company-idle-delay 0.2)
+  (company-tooltip-limit 10)
   :bind (:map company-active-map
               ("RET" . nil)
               ("<return>" . nil)
