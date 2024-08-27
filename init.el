@@ -206,13 +206,9 @@
 (when (string= system-type "darwin")       
   (setq dired-use-ls-dired nil))
 
-(use-package emacs-surround
-  :straight '(emacs-surround
-              :type git
-              :host github
-              :repo "ganmacs/emacs-surround")
-  :config
-  (global-set-key (kbd "C-q") 'emacs-surround))
+(use-package surround
+  :ensure t
+  :bind-keymap ("M-'" . surround-keymap))
 
 (use-package move-lines
   :straight '(move-lines
