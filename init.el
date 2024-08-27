@@ -303,3 +303,19 @@
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
+
+;; tab
+(use-package centaur-tabs
+  :ensure t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-set-icons t)
+  :hook
+  (lisp-interaction-mode . centaur-tabs-local-mode)
+  :bind
+  ("s-[" . centaur-tabs-backward)
+  ("s-]" . centaur-tabs-forward)
+  ("s-w" . kill-this-buffer)
+  ("s-t" . centaur-tabs--create-new-tab)
+  )
