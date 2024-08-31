@@ -145,18 +145,20 @@
 (setq lsp-ui-sideline-enable nil)
 (setq lsp-ui-peek-enable t)
 (setq lsp-ui-doc-enable t)
-(setq lsp-headerline-breadcrumb-enable t)
+(setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-ui-sideline-show-hover nil)
 ;; check if emacs no window mode
 (if (not (display-graphic-p))
     (progn
       (setq lsp-ui-doc-show-with-cursor t)
       (setq lsp-ui-doc-enable nil)
-      (setq lsp-headerline-breadcrumb-enable nil)
       )
   )
 (setq lsp-ui-doc-position 'at-point)
 (setq lsp-ui-doc-show-with-mouse t)
+;; web-mode
+(if (eq major-mode 'web-mode)
+    (setq lsp-enable-indentation nil))
 )
 
 (add-hook 'lsp-mode-hook 'set-up-lsp)

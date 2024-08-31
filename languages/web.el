@@ -17,13 +17,15 @@
   :init
   :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'" . web-mode)
-        ;;  ("\\.jsx?\\'" . web-mode)
-        ;;  ("\\.tsx?\\'" . web-mode))
+         ("\\.jsx?\\'" . web-mode)
+         ("\\.tsx?\\'" . web-mode)
   )
   :hook
   ;; (web-mode . prettier-js-mode)
   (web-mode . company-mode)
   (web-mode . flycheck-mode)
+  (web-mode . lsp-deferred)
+  (web-mode . yas-minor-mode)
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
@@ -32,21 +34,13 @@
   (web-mode-enable-auto-pairing nil)
   (web-mode-enable-auto-opening t)
   (web-mode-enable-auto-closing t)
-  (web-mode-content-types-alist '(("jsx"  . "\\.js[x]?\\'")))
+  (web-mode-enable-auto-indentation nil)
+  (web-mode-enable-auto-quoting nil)
   :config
   (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
-  (require 'prettier-js)
+  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
   (require 'flycheck)
+  (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t))
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   (flycheck-add-mode 'typescript-tslint 'web-mode)
-  ;; hot key for prettier-js
-  (define-key web-mode-map (kbd "C-c l = =") 'prettier-js)
-  ;; eval lsp after web-mode is loaded
-  (eval-after-load 'web-mode
-    '(progn
-      ;;  (require 'lsp)
-      ;;  (add-hook 'web-mode-hook #'lsp-deferred))
-      ;; if tsx or ts file use tide
-      (when (string-match-p "tsx?\\'" (buffer-file-name))
-            (setup-tide-mode))))
 )

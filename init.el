@@ -93,6 +93,7 @@
 (setq recentf-keep '(file-remote-p file-readable-p))
 ;; Exclude files having ".emacs.d" from recentf
 (setq recentf-exclude '("emacs.d"))
+(add-to-list 'recentf-exclude "org-roam")
 
 ;; Set waiting time for tramp
 (setq tramp-connection-timeout 5)
