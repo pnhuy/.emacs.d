@@ -66,6 +66,7 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook (;;(prog-mode . lsp-deferred)
          ;; if you want which-key integration
+         (lsp-mode . yas-minor-mode)
          (lsp-mode . lsp-enable-which-key-integration))
   :bind (:map lsp-mode-map ("C-c l = =" . my-lsp-format-buffer))
   :config
@@ -111,6 +112,8 @@
 ;; change hot key from enter to tab for company-complete-selection
 (use-package company
   :ensure t
+  :hook
+  (prog-mode . company-mode)
   :custom
   (company-minimum-prefix-length 2)
   (company-idle-delay 0.2)
@@ -126,6 +129,8 @@
   :hook (company-mode . company-box-mode))
 
 ;; Copilot
+(use-package editorconfig :ensure t)
+(use-package jsonrpc :ensure t)
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
   ;; :hook (prog-mode . copilot-mode)

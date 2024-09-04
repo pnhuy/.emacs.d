@@ -6,6 +6,8 @@
 ;; disable native comp warning
 (setq native-comp-async-report-warnings-errors nil)
 
+(setq warning-minimum-level :error)
+
 ;; set font
 (cond
  ((find-font (font-spec :name "JetBrainsMono Nerd Font Mono"))
@@ -319,4 +321,21 @@
   ("s-]" . centaur-tabs-forward)
   ("s-w" . kill-this-buffer)
   ("s-t" . centaur-tabs--create-new-tab)
+  )
+
+(use-package multiple-cursors
+  :ensure t
+  :config
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+  )
+
+(use-package origami
+  :ensure t
+  :diminish origami-mode
+  :config
+  (global-origami-mode)
+  (global-set-key (kbd "C-c f") 'origami-toggle-node)
   )
