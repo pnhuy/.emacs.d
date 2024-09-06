@@ -22,6 +22,7 @@
   )
   :hook
   ;; (web-mode . prettier-js-mode)
+  (web-mode . prettier-js-mode)
   (web-mode . company-mode)
   (web-mode . flycheck-mode)
   (web-mode . lsp-deferred)
