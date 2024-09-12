@@ -37,13 +37,7 @@
   (global-set-key (kbd "C-x t r") 'ranger)
   )
 
-(use-package treemacs
-  :ensure t
-  :config
-  ;; show current project only
-  (treemacs-project-follow-mode 1)
-  (setq treemacs-display-current-project-exclusively t)
-)
+(use-package treemacs :ensure t)
 (use-package treemacs-icons-dired :ensure t)
 (use-package lsp-treemacs :ensure t)
 (global-set-key (kbd "C-x t s") 'lsp-treemacs-symbols)
