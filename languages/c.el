@@ -3,6 +3,7 @@
   :config
   (setq clang-format-style "file")
 )
+
 ;; hook for both c and cpp mode
 (add-hook 'c-mode-common-hook
   (lambda ()
@@ -13,5 +14,7 @@
     (yas-minor-mode)
     ;; run lsp
     (lsp)
+    ;; electric mode
+    (electric-pair-mode)
   )
 )
