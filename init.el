@@ -333,6 +333,7 @@
   )
 
 (use-package origami
+  :straight (origami :type git :host github :repo "pnhuy/origami.el")
   :ensure t
   :diminish origami-mode
   :config
