@@ -46,13 +46,17 @@
 
 ;; load theme
 (use-package doom-themes 
-  :ensure t)
+  :ensure t
+  :config
+  (load-theme 'doom-one t))
 
 (use-package auto-dark
   :ensure t
   :custom
   (auto-dark-themes '((doom-one) (doom-one-light)))
-  :init (auto-dark-mode))
+  :config
+  (if (display-graphic-p)
+      (auto-dark-mode t)))
 
 (if (display-graphic-p)
     (progn
@@ -333,6 +337,12 @@
   :config
   (global-origami-mode)
   (global-set-key (kbd "C-c f") 'origami-toggle-node)
+  )
+
+(use-package lsp-origami
+  :ensure t
+  :config
+  (add-hook 'lsp-after-open-hook #'lsp-origami-try-enable)
   )
 
 (use-package smart-hungry-delete
