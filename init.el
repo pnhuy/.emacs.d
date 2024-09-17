@@ -309,6 +309,7 @@
   (setq centaur-tabs-set-icons t)
   :hook
   (lisp-interaction-mode . centaur-tabs-local-mode)
+  (shell-mode . centaur-tabs-local-mode)
   :bind
   ("s-[" . centaur-tabs-backward)
   ("s-]" . centaur-tabs-forward)
@@ -340,3 +341,15 @@
 	       ([remap delete-backward-char] . smart-hungry-delete-backward-char)
 	       ([remap delete-char] . smart-hungry-delete-forward-char))
   :init (smart-hungry-delete-add-default-hooks))
+
+(use-package shell-pop
+  :ensure t
+  :defer t
+  :bind
+  ("C-t" . shell-pop)
+  :config
+  (setq shell-pop-universal-key "C-t")
+  (setq shell-pop-cleanup-buffer-at-process-exit t)
+  (setq shell-pop-autocd-to-working-dir t)
+)
+(add-hook 'shell-mode-hook (lambda () (display-line-numbers-mode -1)))
