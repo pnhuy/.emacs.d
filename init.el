@@ -46,9 +46,13 @@
 
 ;; load theme
 (use-package doom-themes 
+  :ensure t)
+
+(use-package auto-dark
   :ensure t
-  :config
-  (load-theme 'doom-one t))
+  :custom
+  (auto-dark-themes '((doom-one) (doom-one-light)))
+  :init (auto-dark-mode))
 
 (if (display-graphic-p)
     (progn
@@ -57,17 +61,6 @@
     ;; else (optional)
     (progn
       (xterm-mouse-mode -1)))
-
-;; Speed up startup
-;; Don’t compact font caches during GC for doom-modeline
-(setq inhibit-compacting-font-caches t)
-;; Minimize garbage collection during startup
-(setq gc-cons-threshold most-positive-fixnum)
-;; Lower threshold back to 8 MiB (default is 800kB)
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq gc-cons-threshold (expt 2 23))))
-;; END Speed up startup
 
 ;; Increase the amount of data which Emacs reads from the process
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
