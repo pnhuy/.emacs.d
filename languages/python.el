@@ -2,8 +2,8 @@
 
 (defun find-venv ()
   "Find the python executable in the current project's virtual environment."
-;;   (require 'projectile)
-  (let* ((root-dir (or (projectile-project-root) (file-name-directory (buffer-file-name))))
+  (require 'projectile)
+  (let* ((root-dir (or (projectile-project-root) (if buffer-file-name (file-name-directory buffer-file-name) default-directory)))
          (found-venv nil)) ; Initialize found-venv here
     (cond ((file-directory-p (concat root-dir "/.venv"))
              (setq found-venv (concat root-dir "/.venv")))
