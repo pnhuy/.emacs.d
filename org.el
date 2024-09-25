@@ -10,7 +10,10 @@
 ;; (with-eval-after-load "org"
 ;;   (require 'org-phscroll))
 
-(use-package org-bullets :ensure t)
+(use-package org-bullets 
+  :ensure t
+  :hook (org-mode . org-bullets-mode)
+)
 
 (defun org-table-collapse-cell ()
   (interactive)
