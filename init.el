@@ -321,6 +321,7 @@
   :hook
   (lisp-interaction-mode . centaur-tabs-local-mode)
   (shell-mode . centaur-tabs-local-mode)
+  (inferior-python-mode . centaur-tabs-local-mode)
   :bind
   ("s-[" . centaur-tabs-backward)
   ("s-]" . centaur-tabs-forward)
