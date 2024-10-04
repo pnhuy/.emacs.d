@@ -42,11 +42,25 @@
   (org-babel-do-load-languages
   'org-babel-load-languages
   '((R . t)
-    (python . t)))
+    (python . t)
+    (dot . t)))
 
   ;; latex fragment preview dpi
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   (setq org-latex-create-formula-image-program 'dvisvgm)
+  
+  ;; Latex Preview folder
+  (setq org-preview-latex-image-directory 
+        (concat temporary-file-directory "ltximg/"))
+  
+  ;; Config latex preview process list
+  (setq org-preview-latex-default-process 'dvisvgm)
+
+  ;; auto adjust scale after font size change
+  (add-hook 'text-scale-mode-hook
+    (lambda ()
+      (plist-put org-format-latex-options :scale 
+        (expt text-scale-mode-step text-scale-mode-amount))))
   
   ;; set path for python
   (setq org-babel-python-command "python3")
@@ -79,5 +93,3 @@
 )
 
 (add-hook 'org-mode-hook 'set-up-org-mode)
-
-

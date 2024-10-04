@@ -188,19 +188,6 @@
 ;; Projectile
 (setq projectile-switch-project-action #'custom-find-file)
 
-;; Latex Preview folder
-(setq org-preview-latex-image-directory 
-      (concat temporary-file-directory "ltximg/"))
-;; Config latex preview process list
-(setq org-preview-latex-default-process 'dvisvgm)
-
-;; scale latex preview hook after text scale adjust
-(add-hook 'text-scale-mode-hook
-  (lambda ()
-    (setq org-format-latex-options
-      (plist-put org-format-latex-options :scale
-        (expt text-scale-mode-step text-scale-mode-amount)))))
-
 ;; emacs-ipython-notebook config
 (use-package ein :ensure t)
 (setq ein:output-area-inlined-images (display-graphic-p))
