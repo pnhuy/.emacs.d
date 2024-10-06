@@ -45,6 +45,9 @@
     (python . t)
     (dot . t)))
 
+  ;; indent config for org src block
+  (setq org-edit-src-content-indentation 0)
+
   ;; latex fragment preview dpi
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
   (setq org-latex-create-formula-image-program 'dvisvgm)
