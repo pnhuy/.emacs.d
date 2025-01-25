@@ -74,7 +74,11 @@
   :commands lsp)
 
 ;; optionally
-(use-package lsp-ui :ensure t :commands lsp-ui-mode)
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :hook (lsp-mode . lsp-ui-mode)
+)
 ;; if you are helm user
 (use-package helm :ensure t)
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
@@ -164,6 +168,9 @@
 ;; web-mode
 (if (eq major-mode 'web-mode)
     (setq lsp-enable-indentation nil))
+
+;; hide signature documentation but keep the signature
+(setq lsp-signature-render-documentation nil)
 )
 
 (add-hook 'lsp-mode-hook 'set-up-lsp)
