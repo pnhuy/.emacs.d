@@ -37,7 +37,7 @@
   :config
   (ivy-prescient-mode 1)
   (prescient-persist-mode 1)
-  (setq prescient-filter-method '(literal regexp initialism fuzzy))
+  (setq prescient-filter-method '(literal regexp))
   )
 
 (use-package ivy-rich
