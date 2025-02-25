@@ -153,6 +153,7 @@
   :ensure t
   :hook
   (prog-mode . git-gutter-mode)
+  (web-mode .git-gutter-mode)
   :config
   (custom-set-variables '(git-gutter:update-interval 0.5)))
 
