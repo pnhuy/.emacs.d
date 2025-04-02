@@ -15,6 +15,10 @@
   :hook (org-mode . org-bullets-mode)
 )
 
+(use-package org-autolist
+  :ensure t
+  :hook (org-mode . org-autolist-mode))
+
 (defun org-table-collapse-cell ()
   (interactive)
   (save-excursion ;; Save point
