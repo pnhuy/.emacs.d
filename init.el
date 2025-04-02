@@ -10,8 +10,8 @@
 
 ;; set font
 (cond
- ((find-font (font-spec :name "JetBrainsMono Nerd Font Mono"))
-  (set-frame-font "JetBrainsMono Nerd Font Mono-12")))
+ ((find-font (font-spec :name "Fira Code"))
+  (set-frame-font "Fira Code-12")))
 
 ;; truncate lines in echo bar
 (setq message-truncate-lines t)
@@ -326,22 +326,6 @@
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
   )
 
-(use-package origami
-  :straight (origami :type git :host github :repo "pnhuy/origami.el")
-  :ensure t
-  :straight (origami :type git :host github :repo "pnhuy/origami.el")
-  :diminish origami-mode
-  :config
-  (global-origami-mode)
-  (global-set-key (kbd "C-c f") 'origami-toggle-node)
-  )
-
-(use-package lsp-origami
-  :ensure t
-  :config
-  (add-hook 'lsp-after-open-hook #'lsp-origami-try-enable)
-  )
-
 (use-package smart-hungry-delete
   :ensure t
   :bind (([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
@@ -353,10 +337,19 @@
   :ensure t
   :defer t
   :bind
-  ("C-t" . shell-pop)
+  ("C-`" . shell-pop)
   :config
-  (setq shell-pop-universal-key "C-t")
+  (setq shell-pop-universal-key "C-`")
   (setq shell-pop-cleanup-buffer-at-process-exit t)
   (setq shell-pop-autocd-to-working-dir t)
 )
 (add-hook 'shell-mode-hook (lambda () (display-line-numbers-mode -1)))
+
+(use-package ultra-scroll
+  :ensure t
+  :straight (ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll")
+  :init
+  (setq scroll-conservatively 101 ; important!
+        scroll-margin 0) 
+  :config
+  (ultra-scroll-mode 1))
