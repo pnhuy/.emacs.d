@@ -1,7 +1,7 @@
-(use-package typescript-mode
+(use-package typescript-ts-mode
   :ensure t
-  :mode ("\\.ts\\'" . typescript-mode)
-  :mode ("\\.tsx\\'" . typescript-mode)
+  :mode ("\\.ts\\'" . typescript-ts-mode)
+  :mode ("\\.tsx\\'" . typescript-ts-mode)
   :config
   (lsp-deferred)
   (prettier-js-mode t)
