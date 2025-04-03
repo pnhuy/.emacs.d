@@ -97,6 +97,9 @@
   
   ;; start startup folded
   (setq org-startup-folded t)
+
+  ;; inline task
+  (require 'org-inlinetask)
 )
 
 (add-hook 'org-mode-hook 'set-up-org-mode)
