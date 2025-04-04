@@ -22,12 +22,12 @@
 )
 
 ;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
+;; (setq company-tooltip-align-annotations t)
 
 ;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
+;; (add-hook 'before-save-hook 'tide-format-before-save)
 
 ;; if you use typescript-mode
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
 ;; if you use treesitter based typescript-ts-mode (emacs 29+)
-(add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
+;; (add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
