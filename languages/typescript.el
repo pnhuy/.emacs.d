@@ -3,7 +3,7 @@
   :mode ("\\.ts\\'" . typescript-ts-mode)
   :mode ("\\.tsx\\'" . tsx-ts-mode)
   :config
-  (lsp-deferred)
+  ;; (lsp-deferred)
   (prettier-js-mode t)
   (setq typescript-indent-level 2)
   (setq typescript-ts-mode-indent-offset 2))
@@ -28,6 +28,7 @@
 ;; (add-hook 'before-save-hook 'tide-format-before-save)
 
 ;; if you use typescript-mode
-;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
 ;; if you use treesitter based typescript-ts-mode (emacs 29+)
-;; (add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
+(add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
+(add-hook 'tsx-ts-mode-hook #'setup-tide-mode)
