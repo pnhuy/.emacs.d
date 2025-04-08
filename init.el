@@ -34,7 +34,7 @@
 ;; Prompt to delete autosaves when killing buffers.
 (setf kill-buffer-delete-auto-save-files t)
 (setq create-lockfiles nil) ; stop creating # files
-(setq backup-directory-alist '(("." . (concat user-emacs-directory "backups"))))
+(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; config and load packages
 ;; check if package-selected-packages.el exists, if not create it
