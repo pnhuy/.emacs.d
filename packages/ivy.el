@@ -22,7 +22,7 @@
   :diminish counsel-mode
   :init (counsel-mode 1)
   :bind (("M-x" . 'counsel-M-x)
-   ("s-p" . 'counsel-ag)
+   ("C-S-p" . 'counsel-ag)
 	 ("C-x C-f" . 'counsel-find-file)
    ("C-x C-r" . 'counsel-recentf)
 	 ("C-x b" . 'counsel-switch-buffer))
