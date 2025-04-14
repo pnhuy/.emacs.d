@@ -125,6 +125,7 @@
 
 ;; load treesitter config
 (load (expand-file-name "packages/treesitter.el" user-emacs-directory))
+(load (expand-file-name "packages/evil.el" user-emacs-directory))
 
 ;; load language config
 (load (expand-file-name "languages/c.el" user-emacs-directory))
