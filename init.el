@@ -10,8 +10,11 @@
 
 ;; set font
 (cond
- ((find-font (font-spec :name "Fira Code"))
-  (set-frame-font "Fira Code-12")))
+  ((find-font (font-spec :name "Fira Code"))
+   (set-face-attribute 'default nil
+                       :family "Fira Code"
+                       :height 120
+                       :weight 'normal)))
 
 ;; truncate lines in echo bar
 (setq message-truncate-lines t)
