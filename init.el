@@ -357,3 +357,9 @@
         scroll-margin 0) 
   :config
   (ultra-scroll-mode 1))
+
+;; vlfi for viewing large files
+(use-package vlf
+  :ensure t
+  :config
+  (require 'vlf-setup))
