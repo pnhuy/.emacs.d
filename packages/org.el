@@ -100,6 +100,10 @@
 
   ;; inline task
   (require 'org-inlinetask)
+
+  ;; disable line numbers in org-mode
+  (line-number-mode -1)
+  (display-line-numbers-mode -1)
 )
 
 (add-hook 'org-mode-hook 'set-up-org-mode)
