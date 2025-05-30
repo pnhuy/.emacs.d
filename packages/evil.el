@@ -10,5 +10,5 @@
   (evil-org-agenda-set-keys))
 
 ;; Enable Evil
-(require 'evil)
-(evil-mode 1)
+;; (require 'evil)
+;; (evil-mode 1)
