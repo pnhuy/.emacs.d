@@ -142,6 +142,7 @@
 (load (expand-file-name "languages/dart.el" user-emacs-directory))
 (load (expand-file-name "languages/yaml.el" user-emacs-directory))
 (load (expand-file-name "languages/docker.el" user-emacs-directory))
+(load (expand-file-name "languages/lisp.el" user-emacs-directory))
 
 ;; load diminish config
 (load (expand-file-name "packages/diminish.el" user-emacs-directory))
