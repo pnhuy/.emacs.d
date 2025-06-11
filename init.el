@@ -143,6 +143,7 @@
 (load (expand-file-name "languages/yaml.el" user-emacs-directory))
 (load (expand-file-name "languages/docker.el" user-emacs-directory))
 (load (expand-file-name "languages/lisp.el" user-emacs-directory))
+(load (expand-file-name "languages/kotlin.el" user-emacs-directory))
 
 ;; load diminish config
 (load (expand-file-name "packages/diminish.el" user-emacs-directory))
@@ -296,7 +297,10 @@
 (setq viper-expert-level '3)
 
 ;; code folding
-(add-hook 'prog-mode-hook 'hs-minor-mode)
+(add-hook 'prog-mode-hook
+      (lambda ()
+      (unless (derived-mode-p 'kotlin-ts-mode)
+        (hs-minor-mode))))
 (global-set-key (kbd "C-c h") 'hs-hide-block)
 
 ;; recentf stuff
