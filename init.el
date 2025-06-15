@@ -138,6 +138,7 @@
 (load (expand-file-name "languages/js.el" user-emacs-directory))
 (load (expand-file-name "languages/web.el" user-emacs-directory))
 (load (expand-file-name "languages/typescript.el" user-emacs-directory))
+(load (expand-file-name "languages/prisma.el" user-emacs-directory))
 (load (expand-file-name "languages/tex.el" user-emacs-directory))
 (load (expand-file-name "languages/dart.el" user-emacs-directory))
 (load (expand-file-name "languages/yaml.el" user-emacs-directory))
