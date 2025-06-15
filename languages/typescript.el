@@ -1,13 +1,3 @@
-(use-package typescript-ts-mode
-  :ensure t
-  :mode ("\\.ts\\'" . typescript-ts-mode)
-  :mode ("\\.tsx\\'" . tsx-ts-mode)
-  :config
-  ;; (lsp-deferred)
-  (prettier-js-mode t)
-  (setq typescript-indent-level 2)
-  (setq typescript-ts-mode-indent-offset 2))
-
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -15,20 +5,19 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
+  (prettier-js-mode +1)
   (company-mode +1)
-)
+  ;; config prettier-js-show-errors to echo
+  (setq prettier-js-show-errors 'echo)
+  ;; ctrl c l l to format buffer
+  (define-key tide-mode-map (kbd "C-c l = =") 'prettier-js)
+  ;; config emmet-mode for tsx and jsx
+  (emmet-mode +1)
+  (add-to-list 'emmet-jsx-major-modes 'typescript-mode)
+  (add-to-list 'emmet-jsx-major-modes 'typescript-ts-mode)
+  (add-to-list 'emmet-jsx-major-modes 'tsx-ts-mode)
+  )
 
-;; aligns annotation to the right hand side
-;; (setq company-tooltip-align-annotations t)
-
-;; formats the buffer before saving
-;; (add-hook 'before-save-hook 'tide-format-before-save)
-
-;; if you use typescript-mode
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
-;; if you use treesitter based typescript-ts-mode (emacs 29+)
 (add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
 (add-hook 'tsx-ts-mode-hook #'setup-tide-mode)

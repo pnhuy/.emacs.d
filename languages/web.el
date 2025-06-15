@@ -1,5 +1,15 @@
 (use-package tide :ensure t)
 
+(use-package emmet-mode
+  :ensure t
+  :hook (web-mode . emmet-mode)
+  :custom
+  (emmet-expand-jsx-className t)
+  (emmet-indentation 2)
+  :config
+  (setq emmet-move-cursor-between-quotes t)
+)
+
 ;; (defun setup-tide-mode ()
 ;;   (interactive)
 ;;   (tide-setup)
