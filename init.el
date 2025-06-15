@@ -10,10 +10,10 @@
 
 ;; set font
 (cond
-  ((find-font (font-spec :name "Fira Code"))
+  ((find-font (font-spec :name "Iosevka Nerd Font Mono"))
    (set-face-attribute 'default nil
-                       :family "Fira Code"
-                       :height 120
+                       :family "Iosevka Nerd Font Mono"
+                       :height 140
                        :weight 'normal)))
 
 ;; truncate lines in echo bar
@@ -69,6 +69,20 @@
     (progn
       (xterm-mouse-mode -1)))
 
+(use-package company
+  :ensure t
+  :hook
+  (prog-mode . company-mode)
+  :custom
+  (company-minimum-prefix-length 2)
+  (company-idle-delay 0.2)
+  (company-tooltip-limit 10)
+  :bind (:map company-active-map
+              ("RET" . nil)
+              ("<return>" . nil)
+              ("TAB" . company-complete-selection)
+              ("<tab>" . company-complete-selection)))
+
 ;; Increase the amount of data which Emacs reads from the process
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
@@ -112,7 +126,8 @@
 (load (expand-file-name "packages/ivy.el" user-emacs-directory))
 
 ;; load lsp-mode
-(load (expand-file-name "lsp.el" user-emacs-directory))
+;; (load (expand-file-name "lsp.el" user-emacs-directory))
+(load (expand-file-name "packages/lsp-bridge.el" user-emacs-directory))
 
 ;; load treemacs
 ;; (load (expand-file-name "treemacs.el" user-emacs-directory))
@@ -163,6 +178,8 @@
   (web-mode .git-gutter-mode)
   :config
   (custom-set-variables '(git-gutter:update-interval 0.5)))
+
+(use-package helm :ensure t)
 
 (use-package projectile
   :ensure t

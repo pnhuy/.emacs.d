@@ -11,6 +11,7 @@
   (setq prettier-js-show-errors 'echo)
   ;; ctrl c l l to format buffer
   (define-key tide-mode-map (kbd "C-c l = =") 'prettier-js)
+  (define-key tide-mode-map (kbd "C-c f") 'prettier-js)               
   ;; config emmet-mode for tsx and jsx
   (emmet-mode +1)
   (add-to-list 'emmet-jsx-major-modes 'typescript-mode)
