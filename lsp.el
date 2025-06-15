@@ -43,22 +43,31 @@
               (message "Changes made.")))))
       (message "Not a Python file."))))
 
-(defun my-lsp-format-buffer ()
+(defun my/lsp-format-buffer ()
   (interactive)
   (save-buffer)
-  (if (eq major-mode 'python-mode)
-      (ruff-lint-format-dwim)
-    (if (or (string-prefix-p "html" (symbol-name major-mode))
-          (string-prefix-p "json" (symbol-name major-mode))
-          (string-prefix-p "jtsx" (symbol-name major-mode))
-          (string-prefix-p "css" (symbol-name major-mode))
-          (string-prefix-p "typescript" (symbol-name major-mode))
-          (string-prefix-p "tsx" (symbol-name major-mode))
-          (eq major-mode 'mhtml-mode)
-          (eq major-mode 'web-mode)
-          (eq major-mode 'js2-mode))
-        (prettier-js)
-        (lsp-format-buffer))))
+  (cond
+   ((eq major-mode 'python-mode)
+    (ruff-lint-format-dwim))
+   ((eq major-mode 'python-ts-mode)
+    (ruff-lint-format-dwim))
+   ((eq major-mode 'prisma-mode)
+    (when (fboundp 'prisma-fmt-buffer)
+      (prisma-fmt-buffer)))
+   ((or (string-prefix-p "html" (symbol-name major-mode))
+        (string-prefix-p "json" (symbol-name major-mode))
+        (string-prefix-p "jtsx" (symbol-name major-mode))
+        (string-prefix-p "css" (symbol-name major-mode))
+        (string-prefix-p "typescript" (symbol-name major-mode))
+        (string-prefix-p "tsx" (symbol-name major-mode))
+        (eq major-mode 'mhtml-mode)
+        (eq major-mode 'web-mode)
+        (eq major-mode 'js2-mode))
+    (when (require 'prettier-js nil 'noerror)
+      (when (fboundp 'prettier-js)
+        (prettier-js))))
+   (t
+    (lsp-format-buffer))))
 
 (use-package lsp-mode
   :ensure t
@@ -69,7 +78,7 @@
          ;; if you want which-key integration
          (lsp-mode . yas-minor-mode)
          (lsp-mode . lsp-enable-which-key-integration))
-  :bind (:map lsp-mode-map ("C-c l = =" . my-lsp-format-buffer))
+  :bind (:map lsp-mode-map ("C-c l = =" . my/lsp-format-buffer))
   :config
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
   :commands lsp)
@@ -81,11 +90,12 @@
   :hook (lsp-mode . lsp-ui-mode)
 )
 ;; if you are helm user
-(use-package helm :ensure t)
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+(use-package lsp-ivy :ensure t :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :ensure t :commands lsp-treemacs-errors-list)
+(global-set-key (kbd "C-x t s") 'lsp-treemacs-symbols)
+(global-set-key (kbd "C-x t r") 'lsp-treemacs-references)
 
 ;; optionally if you want to use debugger
 (use-package dap-mode
@@ -94,12 +104,6 @@
   ;; (dap-stopped . (lambda (arg) (call-interactively #'dap-hydra)))
 )
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
-
-;; optional if you want which-key integration
-(use-package which-key
-    :ensure t
-    :config
-    (which-key-mode))
 
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.venv\\'")
@@ -113,42 +117,6 @@
 ;; remap xref-find-definitions(M-.) and xref-find-references(M-?) to lsp-ui-peek
 (define-key lsp-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
 (define-key lsp-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-
-;; change hot key from enter to tab for company-complete-selection
-(use-package company
-  :ensure t
-  :hook
-  (prog-mode . company-mode)
-  :custom
-  (company-minimum-prefix-length 2)
-  (company-idle-delay 0.2)
-  (company-tooltip-limit 10)
-  :bind (:map company-active-map
-              ("RET" . nil)
-              ("<return>" . nil)
-              ("TAB" . company-complete-selection)
-              ("<tab>" . company-complete-selection)))
-
-(use-package company-box
-  :ensure t
-  :hook (company-mode . company-box-mode))
-
-;; Copilot
-(use-package editorconfig :ensure t)
-(use-package jsonrpc :ensure t)
-(use-package copilot
-  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
-  ;; :hook (prog-mode . copilot-mode)
-  :ensure t
-  :config
-  (copilot-mode -1)
-  ;; disable warning
-  (setq copilot-indent-offset-warning-disable t)
-  ;; key binding for accept
-  (define-key copilot-mode-map (kbd "C-c C-a") 'copilot-accept-completion)
-  (define-key copilot-mode-map (kbd "C-c C-n") 'copilot-accept-completion-by-line)
-  )
-
 
 ;; function setup lsp mode
 (defun set-up-lsp ()

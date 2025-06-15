@@ -35,7 +35,6 @@
   (web-mode . prettier-js-mode)
   (web-mode . company-mode)
   (web-mode . flycheck-mode)
-  (web-mode . lsp-deferred)
   (web-mode . yas-minor-mode)
   :custom
   (web-mode-markup-indent-offset 2)

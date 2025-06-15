@@ -21,27 +21,27 @@
         (concat (file-truename found-venv) "/bin/python")
       (replace-regexp-in-string "\n" "" (shell-command-to-string "which python3")))))
 
-(defun setup-python-dap ()
-            (message "Find python executable: %s" (find-venv))
-            (dap-setup)
-            (require 'dap-python)
-            (setq dap-python-debugger 'debugpy)
-            (defun dap-python--pyenv-executable-find (command)
-              (find-venv)))
+;; (defun setup-python-dap ()
+;;             (message "Find python executable: %s" (find-venv))
+;;             (dap-setup)
+;;             (require 'dap-python)
+;;             (setq dap-python-debugger 'debugpy)
+;;             (defun dap-python--pyenv-executable-find (command)
+;;               (find-venv)))
 
-(add-hook 'python-mode-hook 'setup-python-dap)
-(add-hook 'python-ts-mode-hook 'setup-python-dap)
+;; (add-hook 'python-mode-hook 'setup-python-dap)
+;; (add-hook 'python-ts-mode-hook 'setup-python-dap)
 
-(defun setup-pyright ()
-   ;; (require 'lsp-pyright)
-   (message "Load pyright")
-   (lsp-deferred))
+;; (defun setup-pyright ()
+;;    ;; (require 'lsp-pyright)
+;;    (message "Load pyright")
+;;    (lsp-deferred))
 
-(use-package lsp-pyright
-  :ensure t
-  :hook
-  (python-mode . setup-pyright)
-  (python-ts-mode . setup-pyright)
-  :config
-  (setq lsp-pyright-multi-root nil)
-)
+;; (use-package lsp-pyright
+;;   :ensure t
+;;   :hook
+;;   (python-mode . setup-pyright)
+;;   (python-ts-mode . setup-pyright)
+;;   :config
+;;   (setq lsp-pyright-multi-root nil)
+;; )

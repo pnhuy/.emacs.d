@@ -2,6 +2,7 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(select-frame-set-input-focus (selected-frame))
 
 ;; disable native comp warning
 (setq native-comp-async-report-warnings-errors nil)
@@ -10,10 +11,10 @@
 
 ;; set font
 (cond
-  ((find-font (font-spec :name "Fira Code"))
+  ((find-font (font-spec :name "Iosevka Nerd Font Mono"))
    (set-face-attribute 'default nil
-                       :family "Fira Code"
-                       :height 120
+                       :family "Iosevka Nerd Font Mono"
+                       :height 140
                        :weight 'normal)))
 
 ;; truncate lines in echo bar
@@ -69,6 +70,44 @@
     (progn
       (xterm-mouse-mode -1)))
 
+(use-package company
+  :ensure t
+  ;; :hook
+  ;; (prog-mode . company-mode)
+  ;; :init
+  ;; ;; should not enable company-mode globally
+  ;; ;; because conflicts with lsp-bridge 
+  ;; (global-company-mode)
+  :custom
+  (company-minimum-prefix-length 2)
+  (company-idle-delay 0.2)
+  (company-tooltip-limit 10)
+  :bind (:map company-active-map
+              ("RET" . nil)
+              ("<return>" . nil)
+              ("TAB" . company-complete-selection)
+              ("<tab>" . company-complete-selection)))
+
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
+
+;; Copilot
+(use-package editorconfig :ensure t)
+(use-package jsonrpc :ensure t)
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+  ;; :hook (prog-mode . copilot-mode)
+  :ensure t
+  :config
+  (copilot-mode -1)
+  ;; disable warning
+  (setq copilot-indent-offset-warning-disable t)
+  ;; key binding for accept
+  (define-key copilot-mode-map (kbd "C-c C-a") 'copilot-accept-completion)
+  (define-key copilot-mode-map (kbd "C-c C-n") 'copilot-accept-completion-by-line)
+  )
+
 ;; Increase the amount of data which Emacs reads from the process
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
@@ -112,7 +151,8 @@
 (load (expand-file-name "packages/ivy.el" user-emacs-directory))
 
 ;; load lsp-mode
-(load (expand-file-name "lsp.el" user-emacs-directory))
+;; (load (expand-file-name "lsp.el" user-emacs-directory))
+(load (expand-file-name "packages/lsp-bridge.el" user-emacs-directory))
 
 ;; load treemacs
 ;; (load (expand-file-name "treemacs.el" user-emacs-directory))
@@ -163,6 +203,8 @@
   (web-mode .git-gutter-mode)
   :config
   (custom-set-variables '(git-gutter:update-interval 0.5)))
+
+(use-package helm :ensure t)
 
 (use-package projectile
   :ensure t
@@ -372,3 +414,19 @@
 
 ;; Delete Selection Mode
 (delete-selection-mode 1)
+
+;; optional if you want which-key integration
+(use-package which-key
+    :ensure t
+    :config
+    (which-key-mode))
+
+(use-package hardtime
+  :init
+  (unless (package-installed-p 'hardtime)
+    (package-vc-install
+     '(hardtime
+       :vc-backend Git
+       :url "https://github.com/ichernyshovvv/hardtime.el"
+       :branch "master")))
+  :hook (prog-mode . hardtime-mode))
