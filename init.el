@@ -369,3 +369,6 @@
   :ensure t
   :config
   (require 'vlf-setup))
+
+;; Delete Selection Mode
+(delete-selection-mode 1)
