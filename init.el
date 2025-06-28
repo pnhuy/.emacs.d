@@ -2,6 +2,7 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(select-frame-set-input-focus (selected-frame))
 
 ;; disable native comp warning
 (setq native-comp-async-report-warnings-errors nil)
@@ -10,10 +11,10 @@
 
 ;; set font
 (cond
-  ((find-font (font-spec :name "Fira Code"))
+  ((find-font (font-spec :name "Iosevka Nerd Font Mono"))
    (set-face-attribute 'default nil
-                       :family "Fira Code"
-                       :height 120
+                       :family "Iosevka Nerd Font Mono"
+                       :height 140
                        :weight 'normal)))
 
 ;; truncate lines in echo bar
@@ -372,3 +373,16 @@
 
 ;; Delete Selection Mode
 (delete-selection-mode 1)
+
+(use-package hardtime
+  :init
+  (unless (package-installed-p 'hardtime)
+    (package-vc-install
+     '(hardtime
+       :vc-backend Git
+       :url "https://github.com/ichernyshovvv/hardtime.el"
+       :branch "master")))
+  :hook (prog-mode . hardtime-mode))
+
+;; load custom settings
+(load (expand-file-name "custom.el" user-emacs-directory))
