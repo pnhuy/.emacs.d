@@ -386,5 +386,8 @@
        :branch "master")))
   :hook (prog-mode . hardtime-mode))
 
+;; disable enable-recursive-minibuffers
+(setq enable-recursive-minibuffers nil)
+
 ;; load custom settings
 (load (expand-file-name "custom.el" user-emacs-directory))
