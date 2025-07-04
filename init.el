@@ -389,5 +389,12 @@
 ;; disable enable-recursive-minibuffers
 (setq enable-recursive-minibuffers nil)
 
+;; darkroom mode
+(use-package darkroom
+  :ensure t
+  :hook
+  (darkroom-mode . centaur-tabs-local-mode)
+  (darkroom-mode . visual-line-mode))
+
 ;; load custom settings
 (load (expand-file-name "custom.el" user-emacs-directory))
