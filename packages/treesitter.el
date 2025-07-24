@@ -16,6 +16,7 @@
   ;; disable because conflicts with lsp typescript
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c-ts-mode))
 )
 
 (use-package treesit-fold

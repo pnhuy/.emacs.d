@@ -45,9 +45,14 @@
   ;; active Babel languages
   (org-babel-do-load-languages
   'org-babel-load-languages
-  '((R . t)
+  '((C . t)
+    (R . t)
     (python . t)
     (dot . t)))
+
+  (defun my-org-confirm-babel-evaluate (lang body)
+    (not (member lang '("C" "C++" "Python"))))  ;don't ask for C, C++, Python
+  (setq org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
 
   ;; indent config for org src block
   (setq org-edit-src-content-indentation 0)
@@ -104,6 +109,11 @@
   ;; disable line numbers in org-mode
   (line-number-mode -1)
   (display-line-numbers-mode -1)
-)
+
+  ;; disable electric pair for < and >
+  (when (fboundp 'electric-pair-mode)
+    (setq-local electric-pair-inhibit-predicate
+                (lambda (c)
+                  (or (eq c ?<) (eq c ?>))))))
 
 (add-hook 'org-mode-hook 'set-up-org-mode)
