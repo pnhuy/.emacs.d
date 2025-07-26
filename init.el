@@ -403,5 +403,9 @@
   (darkroom-mode . centaur-tabs-local-mode)
   (darkroom-mode . visual-line-mode))
 
+;; expand-region for selecting text
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+
 ;; load custom settings
 (load (expand-file-name "custom.el" user-emacs-directory))
