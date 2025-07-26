@@ -101,6 +101,13 @@
 ;; Set waiting time for tramp
 (setq tramp-connection-timeout 5)
 
+;; dump-jump
+(use-package dumb-jump
+  :ensure t
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+)
+
 ;; load dired config
 (load (expand-file-name "packages/dired.el" user-emacs-directory))
 (load (expand-file-name "packages/neotree.el" user-emacs-directory))
