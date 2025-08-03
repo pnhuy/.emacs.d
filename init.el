@@ -407,5 +407,8 @@
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
+;; load utils
+(load (expand-file-name "utils.el" user-emacs-directory))
+
 ;; load custom settings
 (load (expand-file-name "custom.el" user-emacs-directory))
