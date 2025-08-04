@@ -60,7 +60,31 @@
   ;; latex fragment preview dpi
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.25))
   (setq org-latex-create-formula-image-program 'dvisvgm)
-  
+
+  ;; Interactive function to increase or decrease latex preview scale
+  (defun org-increase-latex-preview-scale ()
+    "Increase the scale of LaTeX previews in Org mode."
+    (interactive)
+    (setq org-format-latex-options
+          (plist-put org-format-latex-options :scale
+                     (min 2.0 (+ (plist-get org-format-latex-options :scale) 0.25))))
+    (org-preview-latex-fragment))
+  (defun org-decrease-latex-preview-scale ()
+    "Decrease the scale of LaTeX previews in Org mode."
+    (interactive)
+    (setq org-format-latex-options
+          (plist-put org-format-latex-options :scale
+                     (max 0.25 (- (plist-get org-format-latex-options :scale) 0.25))))
+    (org-preview-latex-fragment))
+
+  ;; function to set the scale of LaTeX previews
+  (defun org-set-latex-preview-scale (scale)
+    "Set the scale of LaTeX previews in Org mode."
+    (interactive "nScale: ")
+    (setq org-format-latex-options
+          (plist-put org-format-latex-options :scale scale))
+    (org-preview-latex-fragment))
+
   ;; Latex Preview folder
   (setq org-preview-latex-image-directory 
         (concat temporary-file-directory "ltximg/"))
