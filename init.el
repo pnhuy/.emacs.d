@@ -247,6 +247,12 @@
 (use-package yasnippet
   :ensure t
   :config
+  ;; set folder for snippets
+  (setq yas-snippet-dirs (list (expand-file-name "snippets" user-emacs-directory)))
+  ;; reload snippets on minor mode activation
+  (add-hook 'yas-minor-mode-hook
+            (lambda ()
+              (yas-reload-all)))
   ;; enable for org and latex
   (add-hook 'org-mode-hook 'yas-minor-mode)
   (add-hook 'LaTeX-mode-hook 'yas-minor-mode)
