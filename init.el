@@ -424,7 +424,9 @@
   :ensure t
   :hook
   (darkroom-mode . centaur-tabs-local-mode)
-  (darkroom-mode . visual-line-mode))
+  (darkroom-mode . visual-line-mode)
+  :config
+  (setq-local line-spacing 0.2))
 
 ;; expand-region for selecting text
 (use-package expand-region
