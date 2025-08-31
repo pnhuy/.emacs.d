@@ -25,3 +25,11 @@
                           (projectile-project-p))
                  (call-interactively #'projectile-invalidate-cache))
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
+
+(require 'cl-lib)
+(defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer 
+          (delq (current-buffer) 
+                (cl-remove-if-not 'buffer-file-name (buffer-list)))))
