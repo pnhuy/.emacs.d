@@ -3,6 +3,8 @@
   :config
   (setq dired-dwim-target t)
   (setq dired-kill-when-opening-new-dired-buffer t)
+  (put 'dired-find-alternate-file 'disabled nil)
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 )
 
 (use-package all-the-icons-dired
