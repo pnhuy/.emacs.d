@@ -10,12 +10,21 @@
 (setq warning-minimum-level :error)
 
 ;; set font
-(cond
-  ((find-font (font-spec :name "Iosevka Nerd Font Mono"))
-   (set-face-attribute 'default nil
-                       :family "Iosevka Nerd Font Mono"
-                       :height 140
-                       :weight 'normal)))
+(defun setup-fonts (frame)
+  "Setup fonts for the given frame."
+  (select-frame frame)
+  (when (display-graphic-p)
+    (when (find-font (font-spec :name "Iosevka Nerd Font Mono"))
+      (set-face-attribute 'default nil
+                          :family "Iosevka Nerd Font Mono"
+                          :height 140
+                          :weight 'normal))))
+
+(add-hook 'after-make-frame-functions 'setup-fonts)
+
+;; Also set for the initial frame (when not using daemon)
+(when (display-graphic-p)
+  (setup-fonts (selected-frame)))
 
 ;; truncate lines in echo bar
 (setq message-truncate-lines t)
