@@ -331,23 +331,23 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 
-;; tab
-(use-package centaur-tabs
-  :ensure t
-  :demand
-  :config
-  (centaur-tabs-mode t)
-  (setq centaur-tabs-set-icons t)
-  :hook
-  (lisp-interaction-mode . centaur-tabs-local-mode)
-  (shell-mode . centaur-tabs-local-mode)
-  (inferior-python-mode . centaur-tabs-local-mode)
-  :bind
-  ("s-[" . centaur-tabs-backward)
-  ("s-]" . centaur-tabs-forward)
-  ("s-w" . kill-this-buffer)
-  ("s-t" . centaur-tabs--create-new-tab)
-  )
+;; ;; tab -- disabled for now because this causes Minibuf-1 issues
+;; (use-package centaur-tabs
+;;   :ensure t
+;;   :demand
+;;   :config
+;;   (centaur-tabs-mode t)
+;;   (setq centaur-tabs-set-icons t)
+;;   :hook
+;;   (lisp-interaction-mode . centaur-tabs-local-mode)
+;;   (shell-mode . centaur-tabs-local-mode)
+;;   (inferior-python-mode . centaur-tabs-local-mode)
+;;   :bind
+;;   ("s-[" . centaur-tabs-backward)
+;;   ("s-]" . centaur-tabs-forward)
+;;   ("s-w" . kill-this-buffer)
+;;   ("s-t" . centaur-tabs--create-new-tab)
+;;   )
 
 (use-package multiple-cursors
   :ensure t
