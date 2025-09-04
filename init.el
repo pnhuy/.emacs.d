@@ -432,8 +432,17 @@
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
+(use-package wttrin
+  :ensure t
+  :commands (wttrin)
+  :bind ("C-c w" . wttrin)
+  :custom
+  (wttrin-default-locations '("Oulu" "Ho Chi Minh" "Seattle")))
+
 ;; load utils
 (load (expand-file-name "utils.el" user-emacs-directory))
 
 ;; load custom settings
-(load (expand-file-name "custom.el" user-emacs-directory))
+;; if exist custom.el, run it
+(when (file-exists-p (expand-file-name "custom.el" user-emacs-directory))
+  (load (expand-file-name "custom.el" user-emacs-directory)))
