@@ -83,8 +83,8 @@
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
 ;; get path from shell
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+(require 'exec-path-from-shell)
+(exec-path-from-shell-initialize)
 
 ;; autocomplete paired brackets
 (electric-pair-mode 1)
