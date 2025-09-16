@@ -172,6 +172,10 @@
 
 ;; hide signature documentation but keep the signature
 (setq lsp-signature-render-documentation nil)
+
+;; disable lsp formatting
+(setq lsp-enable-on-type-formatting nil)
+(setq lsp-format-buffer-on-save nil)
 )
 
 (add-hook 'lsp-mode-hook 'set-up-lsp)
