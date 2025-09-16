@@ -439,6 +439,11 @@
   :custom
   (wttrin-default-locations '("Oulu" "Ho Chi Minh" "Seattle")))
 
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 ;; load utils
 (load (expand-file-name "utils.el" user-emacs-directory))
 
