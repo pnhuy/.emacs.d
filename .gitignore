@@ -1,0 +1,11 @@
+eln-cache
+elpa
+etc
+straight
+tree-sitter
+var
+history
+/custom.el
+/viper*
+/eaf
+/auto-save-list
