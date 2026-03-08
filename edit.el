@@ -39,3 +39,19 @@
 ;; yasnippet-snippets
 (use-package yasnippet-snippets
   :after yasnippet)
+
+;; electric indent mode for programming modes
+(add-hook 'prog-mode-hook 'electric-indent-mode)
+
+;; electric-pair-mode for programming modes
+(add-hook 'prog-mode-hook 'electric-pair-mode)
+
+;; Disable auto-pairing for < in org-mode
+;; because < often use in yanippet
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq-local electric-pair-inhibit-predicate
+                        (lambda (char)
+                          (if (char-equal char ?<)
+                              t
+                            (electric-pair-default-inhibit char))))))
