@@ -43,3 +43,7 @@
   (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
   (setq eglot-extend-to-xref t)
   )
+
+
+(use-package markdown-mode
+  :ensure t)
