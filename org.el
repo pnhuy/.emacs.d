@@ -137,7 +137,21 @@
       (org-latex-preview 16)))) ; Regenerate all previews
 
 ;; set agenda to wildcard *backlog.org files under org-roam directory
-(setq org-agenda-files (file-expand-wildcards (concat my/org-roam-dir "/*backlog.org")))
+(setq org-agenda-files
+      (file-expand-wildcards
+       (concat my/org-roam-dir "/*backlog.org")))
+
+(setq org-agenda-inhibit-startup t)
+
+;; auto close org-agenda files after opening dashboard
+(defun my/org-agenda-close-buffers ()
+  (dolist (file org-agenda-files)
+    (let ((buf (get-file-buffer file)))
+      (when buf
+        (kill-buffer buf)))))
+
+(add-hook 'dashboard-after-initialize-hook #'my/org-agenda-close-buffers)
+
 ;; C-c a to open agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 
