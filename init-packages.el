@@ -35,7 +35,6 @@
     (exec-path-from-shell-initialize)))
 
 (use-package no-littering
-  :ensure t
   :config
   (setq no-littering-etc-directory (expand-file-name "etc/" user-emacs-directory))
   (setq no-littering-var-directory (expand-file-name "var/" user-emacs-directory))
@@ -45,11 +44,8 @@
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 )
 
-(use-package undo-fu
-  :ensure t)
+(use-package undo-fu)
 
-(use-package consult-projectile
-  :ensure t)
+(use-package consult-projectile)
 
-(use-package rg
-  :ensure t)
+(use-package rg)

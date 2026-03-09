@@ -12,7 +12,7 @@
 (use-package dumb-jump
   :config
   (dumb-jump-mode)
-  (setq dumb-jump-force-searcher 'ag)
+  (setq dumb-jump-force-searcher 'rg)
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   )
 

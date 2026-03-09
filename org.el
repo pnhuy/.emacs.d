@@ -1,3 +1,6 @@
+(defvar my/org-roam-dir (file-truename "~/Dropbox/Documents/org-roam")
+  "Root directory for org-roam notes.")
+
 (use-package org
   :defer
   :straight `(org
@@ -108,10 +111,7 @@
    ("C-c n i" . org-roam-node-insert)
    ("C-c n c" . org-roam-capture))
   :custom
-  (org-roam-directory (file-truename "~/Dropbox/Documents/org-roam")))
-
-;; (use-package  org-fragtog
-;;   :hook (org-mode . org-fragtog-mode))
+  (org-roam-directory my/org-roam-dir))
 
 (use-package consult-org-roam
   :after (consult org-roam))
@@ -136,22 +136,8 @@
       (message "Decreased LaTeX preview scale to %s" new-scale)
       (org-latex-preview 16)))) ; Regenerate all previews
 
-;; ;; add hook for text scale increase in org mode
-;; (defun my/org-mode-text-scale-hook ()
-;;   (when (eq major-mode 'org-mode)
-;;     (message "Adjusting LaTeX preview scale for org-mode")
-;;     (let* ((text-scale (if (boundp 'text-scale-mode-amount)
-;;                            (expt 1.5 text-scale-mode-amount)
-;;                          1.0))
-;;            (new-scale text-scale))
-;;       (plist-put org-format-latex-options :scale new-scale)
-;;       (message "Set LaTeX preview scale to %s" new-scale)
-;;       (org-latex-preview 16)))) ; Regenerate all previews
-;; (add-hook 'text-scale-mode-hook 'my/org-mode-text-scale-hook)
-
-
-;; set agenda to wildcard ~/Dropbox/Documents/*backlog.org
-(setq org-agenda-files (file-expand-wildcards "~/Dropbox/Documents/org-roam/*backlog.org"))
+;; set agenda to wildcard *backlog.org files under org-roam directory
+(setq org-agenda-files (file-expand-wildcards (concat my/org-roam-dir "/*backlog.org")))
 ;; C-c a to open agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 
@@ -165,4 +151,5 @@
 
 
 (with-eval-after-load 'recentf
-  (add-to-list 'recentf-exclude "org-roam"))
+  (add-to-list 'recentf-exclude "/org-roam/")
+  (add-to-list 'recentf-exclude "/.emacs.d/"))
