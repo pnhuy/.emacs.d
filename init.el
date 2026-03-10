@@ -1,16 +1,15 @@
 (setq native-comp-async-report-warnings-errors nil)
-(setq warning-minimum-level :error)
+(setq warning-minimum-level :warning)
 (add-hook
  'window-setup-hook
  (lambda ()
    (select-frame-set-input-focus (selected-frame))))
 
 ;; Disable backup files.
-(setf make-backup-files nil)
+(setq make-backup-files nil)
 ;; Prompt to delete autosaves when killing buffers.
-(setf kill-buffer-delete-auto-save-files t)
+(setq kill-buffer-delete-auto-save-files t)
 (setq create-lockfiles nil) ; stop creating # files
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
 (load-theme 'tango-dark t)
 

@@ -134,9 +134,6 @@
    consult-theme :preview-key '(:debounce 0.2 any)
    consult-ripgrep consult-git-grep consult-grep consult-man
    consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-file-register
-   consult--source-recent-file consult--source-project-recent-file
-   ;; :preview-key "M-."
    :preview-key '(:debounce 0.4 any))
 
   ;; Optionally configure the narrowing key.
@@ -172,21 +169,14 @@
         corfu-auto t                   ; Enable automatic pop-up
         corfu-echo-delay 0.1)          ; Delay before showing echo message
 
-  ;; Bind C-SPC to `corfu-insert-separator` if you want to use Orderless-style completion 
+  ;; Bind C-SPC to `corfu-insert-separator` for Orderless-style completion
   ;; in the Corfu popup (e.g. searching 'fn' for 'file-name')
-  (with-eval-after-load 'corfu
-    (define-key corfu-map (kbd "C-SPC") #'corfu-insert-separator)
-    (define-key corfu-map (kbd "<tab>") #'corfu-insert)
-    (define-key corfu-map (kbd "<return>") nil)
-    (define-key corfu-map (kbd "RET") nil)
-    (define-key corfu-map (kbd "C-n") #'corfu-next)
-    (define-key corfu-map (kbd "C-p") #'corfu-previous)
-    (define-key corfu-map (kbd "C-SPC") #'corfu-insert-separator))
-
-  ;; Disable Corfu in terminal mode and use terminal-friendly alternatives
-  (unless (display-graphic-p)
-    (setq corfu-auto nil) ;; Disable auto popup in terminal
-    (global-corfu-mode -1)) ;; Disable Corfu in terminal
+  (define-key corfu-map (kbd "C-SPC") #'corfu-insert-separator)
+  (define-key corfu-map (kbd "<tab>") #'corfu-insert)
+  (define-key corfu-map (kbd "<return>") nil)
+  (define-key corfu-map (kbd "RET") nil)
+  (define-key corfu-map (kbd "C-n") #'corfu-next)
+  (define-key corfu-map (kbd "C-p") #'corfu-previous)
   )
 
 (use-package cape
@@ -200,17 +190,14 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
   )
 
-;; Fallback to company-mode in terminal Emacs
-;; Use company-mode as a terminal-friendly alternative
-(use-package company
+;; corfu-terminal: lightweight Corfu support in terminal frames
+(use-package corfu-terminal
+  :straight (:host codeberg :repo "akib/emacs-corfu-terminal")
   :config
   (unless (display-graphic-p)
-    (global-company-mode 1)
-    (setq company-minimum-prefix-length 1
-          company-idle-delay 0.0)
-    (with-eval-after-load 'company
-      ;; TAB for accepting completions
-      (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-      (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-      ;; Disable RET key to avoid conflicts with newline insertion
-      (define-key company-active-map (kbd "RET") nil))))
+    (corfu-terminal-mode +1))
+  ;; Also activate when a new terminal frame is created
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (unless (display-graphic-p frame)
+                (corfu-terminal-mode +1)))))

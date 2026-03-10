@@ -31,12 +31,19 @@
   (add-to-list 'projectile-globally-ignored-directories "build")
   )
 
-;; Flycheck
-(use-package flycheck
-  :init (global-flycheck-mode))
+;; ;; Prevent straight from overriding built-in packages used by eglot
+;; (use-package project :straight nil)
+;; (use-package xref :straight nil)
+;; (use-package eldoc :straight nil)
+;; (use-package jsonrpc :straight nil)
+
+;; Flymake (built-in, integrates natively with Eglot)
+(use-package flymake
+  :straight nil
+  :hook (prog-mode . flymake-mode))
 
 (use-package eglot
-  :ensure nil
+  :straight nil
   :config
   (add-hook 'prog-mode-hook 'eglot-ensure)
   ;; disable inlay hints
