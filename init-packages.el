@@ -1,3 +1,9 @@
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
+(package-initialize)
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -14,11 +20,14 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Install use-package via straight.el
-(straight-use-package 'use-package)
+;; Install use-package if not already installed
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;; Tell use-package to use straight.el by default
-(setq straight-use-package-by-default t)
+(require 'use-package)
+;; Ensure packages are automatically installed
+(setq use-package-always-ensure t)
 
 (use-package exec-path-from-shell
   :config
@@ -29,6 +38,7 @@
   :config
   (setq no-littering-etc-directory (expand-file-name "etc/" user-emacs-directory))
   (setq no-littering-var-directory (expand-file-name "var/" user-emacs-directory))
+  (require 'no-littering)
   (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))

@@ -1,5 +1,5 @@
 (setq native-comp-async-report-warnings-errors nil)
-(setq warning-minimum-level :warning)
+(setq warning-minimum-level :error)
 (add-hook
  'window-setup-hook
  (lambda ()

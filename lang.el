@@ -39,18 +39,15 @@
 
 ;; Flymake (built-in, integrates natively with Eglot)
 (use-package flymake
-  :straight nil
   :hook (prog-mode . flymake-mode))
 
 (use-package eglot
-  :straight nil
   :config
   (add-hook 'prog-mode-hook 'eglot-ensure)
   ;; disable inlay hints
   (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
   (setq eglot-extend-to-xref t)
   )
-
 
 (use-package markdown-mode
   :ensure t)

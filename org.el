@@ -1,4 +1,4 @@
-(defvar my/org-roam-dir (expand-file-name "~/Dropbox/Documents/org-roam")
+(defvar my/org-roam-dir (file-truename "~/Dropbox/Documents/org-roam")
   "Root directory for org-roam notes.")
 
 (use-package org
@@ -48,14 +48,15 @@
   (setq org-babel-lisp-eval-fn #'sly-eval)
 )
 
-;; (use-package org-latex-preview
-;;   :ensure nil
-;;   :config
-;;   (plist-put org-latex-preview-appearance-options
-;;              :page-width 0.8)
-;;   (add-hook 'org-mode-hook 'org-latex-preview-mode)
-;;   (setq org-latex-preview-mode-display-live t)
-;;   (setq org-latex-preview-mode-update-delay 0.5))
+(use-package org-latex-preview
+  :ensure nil
+  :config
+  ;; Increase preview width
+  (plist-put org-latex-preview-appearance-options
+             :page-width 0.8)
+  (add-hook 'org-mode-hook 'org-latex-preview-mode)
+  (setq org-latex-preview-mode-display-live t)
+  (setq org-latex-preview-mode-update-delay 0.5))
 
 ;; use org-superstar instead of org-bullets
 (use-package org-superstar
@@ -81,15 +82,15 @@
 )
 
 (use-package org-roam
+  :init
+  (org-roam-db-autosync-mode)
   :bind
   (("C-c n l" . org-roam-buffer-toggle)
    ("C-c n f" . org-roam-node-find)
    ("C-c n i" . org-roam-node-insert)
    ("C-c n c" . org-roam-capture))
   :custom
-  (org-roam-directory my/org-roam-dir)
-  :config
-  (org-roam-db-autosync-mode))
+  (org-roam-directory my/org-roam-dir))
 
 (use-package consult-org-roam
   :after (consult org-roam))
@@ -133,11 +134,10 @@
 ;; C-c a to open agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 
+(setq org-todo-keywords
+        '((sequence "TODO(t)" "DOING(i)" "|" "DONE(d)")))
+
 ;; adjust line-spacing in org-mode
 (defun my/org-mode-default-line-spacing ()
   (setq-local line-spacing 0.2))
 (add-hook 'org-mode-hook #'my/org-mode-default-line-spacing)
-
-(with-eval-after-load 'org
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "DOING(i)" "|" "DONE(d)"))))
