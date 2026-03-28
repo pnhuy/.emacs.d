@@ -1,6 +1,9 @@
 (defvar my/org-roam-dir (file-truename "~/Dropbox/Documents/org-roam")
   "Root directory for org-roam notes.")
 
+(defvar my/org-download-dir (concat my/org-roam-dir "/images/")
+  "Directory for org-download images inside org-roam directory.")
+
 (use-package org
   :defer
   :straight `(org
@@ -141,3 +144,136 @@
 (defun my/org-mode-default-line-spacing ()
   (setq-local line-spacing 0.2))
 (add-hook 'org-mode-hook #'my/org-mode-default-line-spacing)
+
+;; org-download configuration
+(use-package org-download
+  :after org
+  :config
+  ;; (message "Configuring org-download...")
+  ;; (message "Org-roam directory: %s" my/org-roam-dir)
+  (setq-default org-download-image-dir my/org-download-dir)
+  ;; (setq org-download-image-org-width 800)
+  (setq org-download-image-prompt t)
+  (add-hook 'org-mode-hook 'org-download-enable))
+(defun my/org-roam-cleanup-images (&optional dry-run)
+  "Find broken image links in org-roam files and optionally orphaned images on disk.
+   With prefix argument (or DRY-RUN non-nil), skip the delete prompt."
+  (interactive "P")
+  (let* ((org-files (directory-files-recursively my/org-roam-dir "\\.org$"))
+         (image-dir (file-truename my/org-download-dir))
+         (image-files (when (file-directory-p image-dir)
+                        (directory-files image-dir t
+                                         "\\.\\(png\\|jpg\\|jpeg\\|gif\\|svg\\|webp\\|bmp\\|tiff?\\)$")))
+         (linked-images (my/org-roam--collect-linked-images org-files image-dir))
+         (orphans (seq-filter (lambda (f)
+                                (not (member (file-truename f) linked-images)))
+                              image-files))
+         (broken-links (my/org-roam--find-broken-links org-files))
+         (buf (get-buffer-create "*org-roam-image-cleanup*")))
+
+    (with-current-buffer buf
+      (read-only-mode -1)
+      (erase-buffer)
+      (insert "Org-Roam Image Cleanup\n")
+      (insert "======================\n")
+      (insert (format "Scanned : %d org files\n" (length org-files)))
+      (insert (format "Images  : %d on disk\n" (length image-files)))
+      (insert (format "Orphans : %d on disk (not linked)\n" (length orphans)))
+      (insert (format "Broken  : %d links pointing to missing files\n\n" (length broken-links)))
+
+      ;; --- Broken links section ---
+      (insert "Broken Links\n")
+      (insert "------------\n")
+      (if (null broken-links)
+          (insert "No broken links found.\n\n")
+        (cl-loop for (org-file line-num img-path) in broken-links do
+          (insert "  ")
+          (let ((file org-file)
+                (line line-num))
+            (insert-text-button
+            (format "%s:%d" (file-relative-name file my/org-roam-dir) line)
+            'action `(lambda (_)
+                        (find-file-other-window ,file)
+                        (goto-char (point-min))
+                        (forward-line (1- ,line)))
+            'follow-link t
+            'help-echo (format "Jump to %s line %d" file line)))
+          (insert (format "\n     missing: %s\n" img-path)))
+        (insert "\n"))
+
+      ;; --- Orphaned files section ---
+      (insert "Orphaned Files on Disk\n")
+      (insert "----------------------\n")
+      (if (null orphans)
+          (insert "No orphaned images found.\n")
+        (dolist (f orphans)
+          (insert (format "  - %s\n" (file-relative-name f image-dir)))))
+
+      (read-only-mode 1)
+      (local-set-key (kbd "q") #'quit-window)
+      (goto-char (point-min)))
+
+    (display-buffer buf
+                    '((display-buffer-below-selected)
+                      (window-height . 0.35)))
+
+    ;; Prompt to delete orphans
+    (when (and orphans (not dry-run))
+      (if (yes-or-no-p (format "Delete %d orphaned image(s) from disk? " (length orphans)))
+          (progn
+            (dolist (f orphans)
+              (delete-file f))
+            (with-current-buffer buf
+              (read-only-mode -1)
+              (goto-char (point-max))
+              (insert (format "\n\nDeleted %d orphaned file(s)." (length orphans)))
+              (read-only-mode 1))
+            (message "Done. Deleted %d orphaned image(s)." (length orphans)))
+        (with-current-buffer buf
+          (read-only-mode -1)
+          (goto-char (point-max))
+          (insert "\n\nAborted. No files were deleted.")
+          (read-only-mode 1))
+        (message "Aborted. No files deleted.")))))
+
+(defun my/org-roam--find-broken-links (org-files)
+  "Scan ORG-FILES for image links whose target file does not exist.
+   Returns a list of (org-file line-number image-path)."
+  (let ((results '()))
+    (dolist (org-file org-files)
+      (with-temp-buffer
+        (insert-file-contents org-file)
+        (goto-char (point-min))
+        (let ((line-num 1))
+          (while (not (eobp))
+            (let ((line (thing-at-point 'line t)))
+              (let ((pos 0))
+                (while (string-match
+                        "\\[\\[file:\\([^]]+\\.\\(?:png\\|jpg\\|jpeg\\|gif\\|svg\\|webp\\|bmp\\|tiff?\\)\\)\\]"
+                        line pos)
+                  (let* ((raw  (match-string 1 line))
+                         (abs  (expand-file-name raw (file-name-directory org-file))))
+                    (unless (file-exists-p abs)
+                      (push (list org-file line-num abs) results)))
+                  (setq pos (match-end 0)))))
+            (forward-line 1)
+            (setq line-num (1+ line-num))))))
+    (nreverse results)))
+
+(defun my/org-roam--collect-linked-images (org-files image-dir)
+  "Return a list of absolute truename paths of images linked from ORG-FILES
+   that reside under IMAGE-DIR."
+  (let ((linked '()))
+    (dolist (org-file org-files)
+      (with-temp-buffer
+        (insert-file-contents org-file)
+        (goto-char (point-min))
+        (while (re-search-forward
+                "\\[\\[file:\\([^]]+\\.\\(?:png\\|jpg\\|jpeg\\|gif\\|svg\\|webp\\|bmp\\|tiff?\\)\\)\\]"
+                nil t)
+          (let* ((raw  (match-string 1))
+                 (abs  (expand-file-name raw (file-name-directory org-file)))
+                 (true (file-truename abs)))
+            (when (string-prefix-p image-dir true)
+              (push true linked))))))
+    (delete-dups linked)))
